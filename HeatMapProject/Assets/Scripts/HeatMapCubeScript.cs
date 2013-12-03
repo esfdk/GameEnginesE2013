@@ -39,7 +39,7 @@ public class HeatMapCubeScript : MonoBehaviour {
 			var heatCubes = GameObject.FindGameObjectsWithTag("HeatCube");
 			foreach(var hc in heatCubes)
 			{
-				Vector2 distance = new Vector2(hc.transform.position.x, hc.transform.position.z) - new Vector2(this.transform.position.x, this.transform.position.z);
+				Vector2 distance = hc.transform.position - this.transform.position;
 				var distSqrMag = distance.sqrMagnitude;
 				if(distSqrMag <= allowedDistance)
 				{
