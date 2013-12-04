@@ -33,8 +33,23 @@ public class GenerateHeatMap : MonoBehaviour
 				var x = float.Parse(bc.ChildNodes[0].InnerText);
 				var y = float.Parse(bc.ChildNodes[1].InnerText);
 				var z = float.Parse(bc.ChildNodes[2].InnerText);
-				Instantiate(HeatMarker, new Vector3(x, y, z), new Quaternion(0,0,0,0));
+				var hm = (GameObject) Instantiate(HeatMarker, new Vector3(x, y, z), new Quaternion(0,0,0,0));
+				hm.transform.parent = this.transform;
 			}
+
+			foreach(var hm in GameObject.FindGameObjectsWithTag("HeatMarker"))
+			{
+				var hmcs = hm.GetComponent<HeatMapCubeScript>();
+				hmcs.SetColor();
+			}
+		}
+	}
+
+	public void Clear()
+	{
+		foreach(var hm in GameObject.FindGameObjectsWithTag("HeatMarker"))
+		{
+			DestroyImmediate(hm);
 		}
 	}
 }

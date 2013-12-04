@@ -14,5 +14,10 @@ public class GenerateHeatMapEditor : Editor {
 		{
 			generateHeatMapScript.Generate();
 		}
+
+		if(GUILayout.Button("Clear Heatmap Markers", GUILayout.Width(150), GUILayout.Height(30)))
+		{
+			generateHeatMapScript.Clear();
+		}
 	}
 }

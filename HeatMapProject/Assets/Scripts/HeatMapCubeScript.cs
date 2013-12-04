@@ -14,41 +14,39 @@ public class HeatMapCubeScript : MonoBehaviour {
 	public Texture texture;
 
 	// If the cube is correctly colored
-	private bool cubeFinished;
+	private bool cubeFinished = false;
 
 	// Use this for initialization
 	void Start () 
 	{
-		renderer.material = new Material(Shader.Find ("Self-Illumin/Diffuse"));
-		renderer.material.mainTexture = texture;
-		renderer.material.color = Color.blue;
+
 	}
 
 	void Update()
 	{
-		var color = renderer.material.color;
-		color.r += heatAdjust;
-		color.b -= heatAdjust;
-		renderer.material.color = color;
 	}
 
-	void setColor()
+	public void SetColor()
 	{
 		if(!cubeFinished)
 		{
-			var heatCubes = GameObject.FindGameObjectsWithTag("HeatCube");
+			var tempMat = new Material(Shader.Find ("Self-Illumin/Diffuse"));
+			//		tempMat.texture = texture;
+			tempMat.color = Color.blue;
+
+			var heatCubes = GameObject.FindGameObjectsWithTag("HeatMarker");
 			foreach(var hc in heatCubes)
 			{
-				Vector2 distance = hc.transform.position - this.transform.position;
-				var distSqrMag = distance.sqrMagnitude;
-				if(distSqrMag <= allowedDistance)
+				var distance = Vector3.Distance(hc.transform.position, this.transform.position);
+				if(distance <= allowedDistance)
 				{
-					var color = renderer.material.color;
+					var color = tempMat.color;
 					color.r += heatAdjust;
 					color.b -= heatAdjust;
-					renderer.material.color = color;
+					tempMat.color = color;
 				}
 			}
+			this.renderer.material = tempMat;
 			cubeFinished = true;
 		}
 	}
