@@ -13,7 +13,7 @@ public class PositionTracker : MonoBehaviour {
 	private float timer = 0;
 	private float saveTimer = 0;
 
-	private List<Vector3> positions;
+	private List<HM_Event> trackedEvents;
 
 	private FileStream fileStream;
 	private StreamWriter sw;
@@ -21,8 +21,7 @@ public class PositionTracker : MonoBehaviour {
 
 	void Start()
 	{
-		positions = new List<Vector3>();
-
+		trackedEvents = new List<HM_Event>();
 
 		var directory = Directory.GetCurrentDirectory() + "\\HeatMapData";
 		if(!Directory.Exists(directory))
@@ -53,23 +52,24 @@ public class PositionTracker : MonoBehaviour {
 		if(timer >= interval)
 		{
 			timer = 0;
-			
-			positions.Add(transform.position);
+
+			trackedEvents.Add(new HM_Event(HM_EventTypes.BreadCrumb, transform.position));
 		}
 
 		if(saveTimer >= saveInterval)
 		{
 			saveTimer = 0;
 			SaveToFile();
-			positions.Clear();
+			trackedEvents.Clear();
 		}
 	}
 
 	void OnApplicationQuit()
 	{
 		writer.WriteEndElement();
-			writer.WriteEndElement();
-			writer.WriteEndDocument();
+		writer.WriteEndElement();
+		writer.WriteEndDocument();
+
 		writer.Close();
 		sw.Close();
 		fileStream.Close();
@@ -77,20 +77,9 @@ public class PositionTracker : MonoBehaviour {
 
 	void SaveToFile()
 	{
-		foreach(var p in positions)
+		foreach(var trackedEvent in trackedEvents)
 		{
-			writer.WriteStartElement("BreadCrumb");
-			writer.WriteElementString("x", p.x.ToString());
-			writer.WriteElementString("y", p.y.ToString());
-			writer.WriteElementString("z", p.z.ToString());
-			writer.WriteEndElement();
+			trackedEvent.SaveToFile(writer);
 		}
-	}
-
-	void StorePosition()
-	{
-		timer = 0;
-		
-		positions.Add(transform.position);
 	}
 }
