@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -79,7 +79,7 @@ public class PositionTracker : MonoBehaviour {
 	{
 		foreach(var trackedEvent in trackedEvents)
 		{
-			trackedEvent.SaveToFile(writer);
+			trackedEvent.WriteToFile(writer);
 		}
 	}
 }

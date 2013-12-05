@@ -5,8 +5,7 @@ using System.Globalization;
 
 public class GenerateHeatMap : MonoBehaviour
 {
-	private string heatMapData;
-	private string sessionFolder;
+	private string heatMapFile, heatMapObject, heatMapEvent;
 
 	/// <summary>
 	/// The object to instantiate as heat markers.
@@ -34,18 +33,33 @@ public class GenerateHeatMap : MonoBehaviour
 	private Color ColorHot = new Color(Color.red.r, Color.red.g, Color.red.b, 0.25f);
 
 	/// <summary>
-	/// The heat map data to render.
+	/// Gets or sets the file that contains the data for the heatmap.
 	/// </summary>
-	public string HeatMapData
+	/// <value>The heat map data file.</value>
+	public string HeatMapFile
 	{
-		get { return heatMapData; }
-		set { heatMapData = value; }
+		get { return heatMapFile; }
+		set { heatMapFile = value; }
 	}
-	
-	public string SessionFolder
+
+	/// <summary>
+	/// Gets or sets the chosen object for the heat map.
+	/// </summary>
+	/// <value>The heat map object.</value>
+	public string HeatMapObject
 	{
-		get { return sessionFolder; }
-		set { sessionFolder = value; }
+		get { return heatMapObject; }
+		set { heatMapObject = value; }
+	}
+
+	/// <summary>
+	/// Gets or sets the chosen event for the heat map.
+	/// </summary>
+	/// <value>The heat map event.</value>
+	public string HeatMapEvent
+	{
+		get { return heatMapEvent; }
+		set { heatMapEvent = value; }
 	}
 
 	/// <summary>
@@ -53,37 +67,41 @@ public class GenerateHeatMap : MonoBehaviour
 	/// </summary>
 	public void Generate()
 	{
-
-		if(HeatMapData != null)
+		if(HeatMapFile != null)
 		{
+			// This part seems strange is prolly not necessary anymore, but meh.
 			var directory = Directory.GetCurrentDirectory() + "\\HeatMapData";
 			if(!Directory.Exists(directory))
 			{
 				Directory.CreateDirectory(directory);
 			}
-			var filename = directory;
 
-			if (SessionFolder != null)
-			{
-				filename = filename + "\\" + SessionFolder;
-			}
-
-			filename = filename + "\\" + HeatMapData;
-
+			// Get the filename and ensure it ends in .xml
+			var filename = directory + "\\" + HeatMapFile;
 			if(!filename.Substring(filename.Length - 4, 4).Equals(".xml"))
 			{
 				filename += ".xml";
 			}
 
+			// Check if the object/event is "All" or not.
+			var actualObject = (HeatMapObject.Equals("All")) ? "*" : HeatMapObject;
+			var actualEvent = (HeatMapEvent.Equals("All")) ? "*" : HeatMapEvent;
+
+			// Create an XML reader for the file.
 			XmlReader reader = XmlReader.Create(filename);
 			XmlDocument xd = new XmlDocument();
 			xd.Load(reader);
 
-			foreach(XmlNode bc in xd.DocumentElement.GetElementsByTagName("BreadCrumb"))
+			// Get the chosen events for the chosen object.
+			XmlElement xelRoot = xd.DocumentElement;
+			XmlNodeList xnlNodes = xelRoot.SelectNodes("/TrackingData/" + actualObject + "/" + actualEvent);
+
+			// Iterate over all the event nodes and create markers for them.
+			foreach(XmlNode node in xnlNodes)
 			{
-				var x = float.Parse(bc.Attributes["x"].Value);
-				var y = float.Parse(bc.Attributes["y"].Value);
-				var z = float.Parse(bc.Attributes["z"].Value);
+				var x = float.Parse(node.Attributes["x"].Value);
+				var y = float.Parse(node.Attributes["y"].Value);
+				var z = float.Parse(node.Attributes["z"].Value);
 				var hm = (GameObject) Instantiate(HeatMarker, new Vector3(x, y, z), new Quaternion(0,0,0,0));
 				hm.transform.localScale = new Vector3(HeatMarkerScale, HeatMarkerScale, HeatMarkerScale);
 				hm.transform.parent = this.transform;

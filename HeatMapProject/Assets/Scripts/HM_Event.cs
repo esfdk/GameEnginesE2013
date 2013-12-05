@@ -18,7 +18,7 @@ public class HM_Event
 		this.position = position;
 	}
 
-	public void SaveToFile(XmlTextWriter writer)
+	public void WriteToFile(XmlTextWriter writer)
 	{
 		writer.WriteStartElement(eventType);
 		writer.WriteAttributeString("x", position.x.ToString());

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TrackingData>
+    <FirstPersonController>
+        <BreadCrumb x="0" y="1.05" z="2.895193" />
+        <BreadCrumb x="0.5368325" y="1.05" z="3.538509" />
+        <BreadCrumb x="5.584264" y="1.05" z="-4.507026" />
+        <BreadCrumb x="1.739017" y="1.05" z="-2.366813" />
+        <BreadCrumb x="10.52178" y="1.05" z="-1.742617" />
+        <BreadCrumb x="19.98347" y="1.05" z="0.01840253" />
+        <BreadCrumb x="24.55402" y="1.05" z="6.822086" />
+    </FirstPersonController>
+    <Sphere>
+        <BreadCrumb x="-43.04825" y="28.12031" z="44.6291" />
+        <BreadCrumb x="-43.04825" y="13.111" z="44.6291" />
+        <BreadCrumb x="-43.04825" y="0.48" z="44.6291" />
+        <BreadCrumb x="-43.04825" y="0.48" z="44.6291" />
+        <BreadCrumb x="-43.04825" y="0.48" z="44.6291" />
+        <BreadCrumb x="-43.04825" y="0.48" z="44.6291" />
+        <BreadCrumb x="-43.04825" y="0.48" z="44.6291" />
+    </Sphere>
+</TrackingData>
