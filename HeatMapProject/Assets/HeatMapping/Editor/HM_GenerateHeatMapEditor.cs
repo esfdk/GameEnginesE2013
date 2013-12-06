@@ -6,15 +6,15 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 
-[CustomEditor(typeof(GenerateHeatMap))]
-public class GenerateHeatMapEditor : Editor 
+[CustomEditor(typeof(HM_GenerateHeatMap))]
+public class HM_GenerateHeatMapEditor : Editor 
 {
 	string[] heatMapSessions, heatMapSessionFilePaths, objectList, eventList;
 	int _sessionsIndex = 0, _objectIndex = 0, _eventIndex = 0;
 
 	public override void OnInspectorGUI()
 	{
-		GenerateHeatMap generateHeatMapScript = (GenerateHeatMap)target;
+		HM_GenerateHeatMap generateHeatMapScript = (HM_GenerateHeatMap)target;
 
 		var directory = Directory.GetCurrentDirectory() + "\\HeatMapData";
 

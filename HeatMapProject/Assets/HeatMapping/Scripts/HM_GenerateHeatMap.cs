@@ -3,7 +3,7 @@ using System.IO;
 using System.Xml;
 using System.Globalization;
 
-public class GenerateHeatMap : MonoBehaviour
+public class HM_GenerateHeatMap : MonoBehaviour
 {
 	private string heatMapFile, heatMapObject, heatMapEvent;
 
@@ -127,7 +127,7 @@ public class GenerateHeatMap : MonoBehaviour
 		
 		foreach(var hm in GameObject.FindGameObjectsWithTag("HeatMarker"))
 		{
-			var hms = hm.GetComponent<HeatMarkerScript>();
+			var hms = hm.GetComponent<HM_HeatMarkerScript>();
 			var d = hms.GetDensity(AllowedDistance);
 			highestDensity = d > highestDensity ? d : highestDensity;
 		}
@@ -141,7 +141,7 @@ public class GenerateHeatMap : MonoBehaviour
 
 		foreach(var hm in GameObject.FindGameObjectsWithTag("HeatMarker"))
 		{
-			var hms = hm.GetComponent<HeatMarkerScript>();
+			var hms = hm.GetComponent<HM_HeatMarkerScript>();
 			var densityPercent = hms.Density / highestDensity;
 			hms.SetColor(SlerpedColor(densityPercent));
 		}

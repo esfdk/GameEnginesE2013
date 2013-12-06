@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TrackingData>
+    <FirstPersonController>
+        <BreadCrumb x="-30.76492" y="1.05" z="-72.16901" />
+        <BreadCrumb x="-36.51834" y="1.05" z="-64.17813" />
+        <BreadCrumb x="-37.68471" y="1.05" z="-56.19687" />
+        <BreadCrumb x="-36.84048" y="1.05" z="-46.38294" />
+        <BreadCrumb x="-36.84048" y="1.05" z="-36.38346" />
+        <BreadCrumb x="-36.84048" y="1.05" z="-26.18346" />
+        <BreadCrumb x="-36.84048" y="1.05" z="-16.18346" />
+    </FirstPersonController>
+</TrackingData>
