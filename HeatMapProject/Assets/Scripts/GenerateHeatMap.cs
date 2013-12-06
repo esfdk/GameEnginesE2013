@@ -69,6 +69,12 @@ public class GenerateHeatMap : MonoBehaviour
 	{
 		if(HeatMapFile != null)
 		{
+			if (HeatMapFile.Equals("None"))
+			{
+				Debug.Log("Select valid data before trying to generate the heatmap");
+				return;
+			}
+
 			// This part seems strange is prolly not necessary anymore, but meh.
 			var directory = Directory.GetCurrentDirectory() + "\\HeatMapData";
 			if(!Directory.Exists(directory))
@@ -118,7 +124,7 @@ public class GenerateHeatMap : MonoBehaviour
 	public void CalculateDensity()
 	{
 		highestDensity = 0;
-		Debug.Log (highestDensity);
+
 		foreach(var hm in GameObject.FindGameObjectsWithTag("HeatMarker"))
 		{
 			var hmcs = hm.GetComponent<HeatMarkerScript>();

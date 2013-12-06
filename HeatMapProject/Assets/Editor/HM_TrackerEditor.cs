@@ -12,7 +12,9 @@ public class HM_TrackerEditor : Editor
 	private Dictionary<string, string> _eventTooltips = new Dictionary<string, string>()
 	{
 		{ HM_EventTypes.Awake, "Send an event when object is initialized." },
-		{ HM_EventTypes.Destroy, "Send an even when the object is destroyed." }
+		{ HM_EventTypes.Destroy, "Send an even when the object is destroyed." },
+		{ HM_EventTypes.OnTriggerEnter, "Send an even when the object enters any trigger." },
+		{ HM_EventTypes.OnMouseUp, "Send an even when the mouse button is released." }
 	};
 	
 	override public void OnInspectorGUI ()

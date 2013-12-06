@@ -14,7 +14,7 @@ public class HM_Event
 
 	public HM_Event(string eventType, Vector3 position)
 	{
-		this.eventType = eventType;
+		this.eventType = eventType.Replace(" ", string.Empty);
 		this.position = position;
 	}
 

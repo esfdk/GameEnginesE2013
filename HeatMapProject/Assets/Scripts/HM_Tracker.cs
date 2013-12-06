@@ -17,7 +17,7 @@ public class HM_Tracker : MonoBehaviour
 
 	private string fileName;
 
-	private List<HM_Event> trackedEvents;
+	private List<HM_Event> eventsLogged;
 
 	private FileStream fileStream;
 	private StreamWriter sw;
@@ -30,7 +30,7 @@ public class HM_Tracker : MonoBehaviour
 	/// </summary>
 	void Start () 
 	{
-		trackedEvents = new List<HM_Event>();
+		eventsLogged = new List<HM_Event>();
 		CreateXMLTextWriter();
 	}
 	
@@ -44,14 +44,23 @@ public class HM_Tracker : MonoBehaviour
 		if (Time.time > _lastBreadCrumb + breadCrumbInterval)
 		{
 			_lastBreadCrumb = Time.time;
-			trackedEvents.Add(new HM_Event(HM_EventTypes.BreadCrumb, transform.position));
+			eventsLogged.Add(new HM_Event(HM_EventTypes.BreadCrumb, transform.position));
 		}
-		
+
+		if (TrackedEvents.Contains(HM_EventTypes.OnMouseUp))
+		{
+			if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1) || Input.GetMouseButtonUp(2))
+			{
+				Debug.Log("Test");
+				eventsLogged.Add(new HM_Event(HM_EventTypes.OnMouseUp, transform.position));
+			}
+		}
+
 		if(saveTimer >= saveInterval)
 		{
 			saveTimer = 0;
 			SaveToFile();
-			trackedEvents.Clear();
+			eventsLogged.Clear();
 		}
 	}
 	
@@ -59,7 +68,7 @@ public class HM_Tracker : MonoBehaviour
 	{
 		if (TrackedEvents.Contains(HM_EventTypes.Awake))
 		{
-			trackedEvents.Add(new HM_Event(HM_EventTypes.Awake, transform.position));
+			eventsLogged.Add(new HM_Event(HM_EventTypes.Awake, transform.position));
 		}
 	}
 
@@ -67,7 +76,15 @@ public class HM_Tracker : MonoBehaviour
 	{
 		if (TrackedEvents.Contains(HM_EventTypes.Destroy))
 		{
-			trackedEvents.Add(new HM_Event(HM_EventTypes.Destroy, transform.position));
+			eventsLogged.Add(new HM_Event(HM_EventTypes.Destroy, transform.position));
+		}
+	}
+
+	void OnTriggerEnter()
+	{
+		if (TrackedEvents.Contains(HM_EventTypes.OnTriggerEnter))
+		{
+			eventsLogged.Add(new HM_Event(HM_EventTypes.OnTriggerEnter, transform.position));
 		}
 	}
 
@@ -95,7 +112,7 @@ public class HM_Tracker : MonoBehaviour
 	/// </summary>
 	void SaveToFile()
 	{
-		foreach(var trackedEvent in trackedEvents)
+		foreach(var trackedEvent in eventsLogged)
 		{
 			trackedEvent.WriteToFile(writer);
 		}
@@ -134,5 +151,14 @@ public class HM_Tracker : MonoBehaviour
 		writer.WriteStartElement("TrackingData");
 		
 		writer.WriteStartElement(this.gameObject.name.Replace(" ", string.Empty));
+	}
+
+	/// <summary>
+	/// Adds the given event to the tracker.
+	/// </summary>
+	/// <param name="gameEvent"> The event to track. </param>
+	public void AddEvent(HM_Event gameEvent)
+	{
+		this.eventsLogged.Add(gameEvent);
 	}
 }

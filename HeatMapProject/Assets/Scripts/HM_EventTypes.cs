@@ -9,4 +9,6 @@ public static class HM_EventTypes
 	public static string BreadCrumb = "BreadCrumb";
 	public static string Awake = "Awake";
 	public static string Destroy = "Destroy";
+	public static string OnTriggerEnter = "OnTriggerEnter";
+	public static string OnMouseUp = "OnMouseUp";
 }
