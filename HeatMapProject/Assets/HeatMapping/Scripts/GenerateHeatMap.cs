@@ -124,11 +124,11 @@ public class GenerateHeatMap : MonoBehaviour
 	public void CalculateDensity()
 	{
 		highestDensity = 0;
-
+		
 		foreach(var hm in GameObject.FindGameObjectsWithTag("HeatMarker"))
 		{
-			var hmcs = hm.GetComponent<HeatMarkerScript>();
-			var d = hmcs.GetDensity(AllowedDistance);
+			var hms = hm.GetComponent<HeatMarkerScript>();
+			var d = hms.GetDensity(AllowedDistance);
 			highestDensity = d > highestDensity ? d : highestDensity;
 		}
 	}
@@ -141,9 +141,9 @@ public class GenerateHeatMap : MonoBehaviour
 
 		foreach(var hm in GameObject.FindGameObjectsWithTag("HeatMarker"))
 		{
-			var hmcs = hm.GetComponent<HeatMarkerScript>();
-			var densityPercent = hmcs.Density / highestDensity;
-			hmcs.SetColor(SlerpedColor(densityPercent));
+			var hms = hm.GetComponent<HeatMarkerScript>();
+			var densityPercent = hms.Density / highestDensity;
+			hms.SetColor(SlerpedColor(densityPercent));
 		}
 	}
 
