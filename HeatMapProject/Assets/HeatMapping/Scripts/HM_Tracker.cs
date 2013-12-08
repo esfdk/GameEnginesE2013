@@ -51,7 +51,6 @@ public class HM_Tracker : MonoBehaviour
 		{
 			if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1) || Input.GetMouseButtonUp(2))
 			{
-				Debug.Log("Test");
 				eventsLogged.Add(new HM_Event(HM_EventTypes.OnMouseUp, transform.position));
 			}
 		}
