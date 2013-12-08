@@ -1,8 +1,24 @@
 \section{How To Use}
 \label{HowToUse}
+The heatmapping plugin consists of two parts: tracking objects and generating the heatmap.
 
-\subsection{Tracking objects}
+To access the plugin, the custom package must be imported. The package consists of 4 folders. Only the \textit{Scripts/HM\_Tracker} and \textit{Prefabs/HM\_HeatMap} should be accessed.
+
+\subsection{Tracking game objects}
 \label{HowToUse_Tracking}
+To track a game object, the \textit{HM\_Tracker} script must be attached to the object. Attaching the \textit{HN\_Tracker} to an object allows the user to change the tracking interval, save interval and which events that are toggled.
+\\The tracker can record the position of the game object when the following events happen: Breadcrumb (object position at intervals), Awake, onDestroy, OnMouseUp and OnTriggerEnter.
+
+INSERT SCREENSHOT OF TRACKER OPTIONS
+
+The OnMouseUp event is only tracked on every call to Update on the game object. Assuming 30 calls to update per second (30 fps), the tracker will register a maximum of 30 mouse up events per second.
+
+The tracking interval determines the minimum interval between every breadcrumb in seconds. This value cannot be less than one second\footnote{If the value was lower, it could become a memory hog and take too long to save event info.}.
+
+The save interval is the minimum time between the positions being saved to file\footnote{Like the tracking interval, this value cannot be less than 1. We felt that saving event information more often than breadcrumbs can be tracked makes sense.}. 
+If a game uses a lot of memory, a lower value here would mean less memory is used, but would also mean that the harddrive is accessed more often.
+
+\subsubsection{Custom events}
 
 \subsection{Generating the heat map}
 \label{HowToUse_Generating}
