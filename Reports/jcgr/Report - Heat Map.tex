@@ -1,0 +1,144 @@
+\documentclass[titlepage]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{fancyhdr}
+\usepackage[final]{pdfpages}
+\usepackage[font=sl]{caption}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{appendix}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+\usepackage{tocvsec2}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{inconsolata}
+\usepackage[bottom]{footmisc}
+\usepackage{titletoc}
+\usepackage{lastpage}
+\usepackage{appendix}
+\usepackage{savefnmark}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{wrapfig}
+
+% Chapter and section spacings
+\titleformat{\chapter}{\normalfont\huge\bfseries}{{\thechapter} }{0pt}{\Huge}
+\titlespacing*{\chapter} {0pt}{0pt}{0pt}
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{0.5em}{}
+\titlespacing*{\section}{0pt}{1.5ex plus 1ex minus .2ex}{0.8ex plus .2ex}
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{0.5em}{}
+\titlespacing*{\subsection} {0pt}{0.5ex}{0.5ex}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\subsubsection}{0pt}{0.5ex}{0.5ex}
+\titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{\theparagraph}{0.85em}{\large}
+\titlespacing*{\paragraph} {0pt}{1ex}{0.5em}
+\titleformat{\subparagraph}[runin]{\normalfont\normalsize\bfseries}{\thesubparagraph}{1em}{\normalsize}
+\titlespacing*{\subparagraph} {0pt}{\parindent}{0.5em}
+
+% Text formatting
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.8ex plus 0.5ex minus 0.2ex}
+
+% Hyper setup
+\hypersetup{
+    colorlinks,%
+    citecolor=black,%
+    filecolor=black,%
+    linkcolor=black,%
+    urlcolor=blue
+}
+
+\lstset{
+numbers = left,
+linewidth=\linewidth,
+breaklines=true}
+
+% Page style
+\setlength{\headheight}{15.2pt}
+\setlength{\topskip}{20pt}
+\pagestyle{fancy}
+\cfoot{\thepage\ of \pageref{LastPage}}
+\fancypagestyle{plain}{\fancyhf{}\cfoot{\thepage\ af \pageref{LastPage}}
+}
+\fancypagestyle{plain}{
+\fancyhf{}
+\cfoot{\thepage\ af \pageref{LastPage}}
+}
+
+\captionsetup{labelfont=bf}
+
+% New commands and environments
+\newenvironment{my_itemize}{\begin{itemize}[itemsep=0pt, topsep=0pt, partopsep=0pt]}{\end{itemize}}
+\newenvironment{my_enumerate}{\begin{enumerate}[itemsep=0pt, topsep=0pt, partopsep=0pt]}{\end{enumerate}}
+\newenvironment{my_description}{\begin{description}[itemsep=0pt, topsep=0pt, partopsep=0pt]}{\end{description}}
+\newcommand{\skippage}
+{
+        \thispagestyle{empty}
+        \addtocounter{page}{-1}
+        \pagebreak
+}
+
+\newcommand{\refFig}[1]{\textbf{figure \ref{fig:#1}}}
+
+\newcommand{\insertPicture}[4]{
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=#1\textwidth]{Images/#2}
+	\caption{#3}
+	\label{fig:#4}
+\end{figure}
+}
+
+\newcommand{\insertTwoPictures}[4]{
+\begin{figure}[ht]
+\begin{minipage}[b]{0.5\linewidth}
+	\centering
+	\includegraphics[width=\textwidth]{Images/#1}
+\end{minipage}
+\begin{minipage}[b]{0.5\linewidth}
+	\centering
+	\includegraphics[width=\textwidth]{Images/#2}
+\end{minipage}
+\caption{#3}
+\label{fig:#4}
+\end{figure}
+}
+
+\newcommand{\insertWPicture}[4]{
+\begin{wrapfigure}{r}{#1\textwidth}
+\begin{center}
+	\includegraphics[width=#1\textwidth]{#2}
+\end{center}
+\caption{#3}
+\label{fig:#4}
+\end{wrapfigure}
+}
+
+% Title
+\title{
+\Huge{Heat Mapping Unity Plugin}\\
+\Large{Game Engines E2013}
+\large{\textit{\\IT-University of Copenhagen}}
+}
+
+% Author
+\author{Jacob Claudius Grooss, jcgr@itu.dk}
+
+\date{December 11th, 2013}
+\begin{document}
+\thispagestyle{empty}
+\maketitle
+%\skippage
+\input{Parts/01_Intro.tex}
+\input{Parts/02_Overview.tex}
+\input{Parts/03_PluginOverview.tex}
+\input{Parts/04_HowToUse.tex}
+\input{Parts/05_Performance.tex}
+\input{Parts/06_Conclusion.tex}
+\end{document}
