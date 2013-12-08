@@ -18,7 +18,14 @@ The tracking interval determines the minimum interval between every breadcrumb i
 The save interval is the minimum time between the positions being saved to file\footnote{Like the tracking interval, this value cannot be less than 1. We felt that saving event information more often than breadcrumbs can be tracked makes sense.}. 
 If a game uses a lot of memory, a lower value here would mean less memory is used, but would also mean that the harddrive is accessed more often.
 
+The tracked data is saved in a file named "HeatMapData/HeatMapData YYYY.MM.DD HH.MM.SS.xml"\footnote{Tracked data for individual game objects are saved in folder "HeatMapData/YYYY.MM.DD hh.mm.ss/HeatMapDataNameOfGameObject.xml".}.
+
 \subsubsection{Custom events}
+There are two ways to create custom events. 
+
+The first way is to create a separate script that calls the AddEvent method of the \textit{HM\_Tracker} component on the game object whenever the event happens. This is how we designed custom events to be tracked.
+
+The second way is to modify the \textit{HM\_tracker} script, so that the event is tracked from inside the script itself.
 
 \subsection{Generating the heat map}
 \label{HowToUse_Generating}
