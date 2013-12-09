@@ -67,7 +67,7 @@ breaklines=true}
 \cfoot{{\thepage} of \pageref{LastPage}}
 
 % Table of contents depth
-\settocdepth{section}
+\settocdepth{subsection}
 
 % New commands and environments
 \newenvironment{my_itemize}{\begin{itemize}[itemsep=0pt, topsep=0pt, partopsep=0pt]}{\end{itemize}}
@@ -82,7 +82,7 @@ breaklines=true}
 
 % Title
 \title{
-\Huge{Heatmapping Unity Plugin}\\
+\Huge{Unity Heat Map Plug-in}\\
 \Large{Game Engines E2013}
 }
 
@@ -94,9 +94,13 @@ breaklines=true}
 \thispagestyle{empty}
 \maketitle
 \skippage
+\tableofcontents
+\skippage
 \input{Sections/Intro.tex}
+\input{Sections/ProjectOverview.tex}
 \input{Sections/HowToUse.tex}
 \input{Sections/CodeOverview.tex}
 \input{Sections/Performance.tex}
+\input{Sections/Issues.tex}
 \input{Sections/Conclusion.tex}
 \end{document}

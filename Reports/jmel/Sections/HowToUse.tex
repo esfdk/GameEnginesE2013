@@ -1,8 +1,8 @@
 \section{How To Use}
 \label{HowToUse}
-The heatmapping plugin consists of two parts: tracking objects and generating the heatmap.
+The heat mapping plug-in consists of two parts: tracking objects and generating the heat map.
 
-To access the plugin, the custom package must be imported. The package consists of 4 folders. \textit{Scripts/HM\_Tracker} and \textit{Prefabs/HM\_HeatMap} are the elements used by the developer to create heatmaps. The rest of the files should not be used.
+To access the plug-in, the custom package must be imported. The package consists of 4 folders. \textit{Scripts/HM\_Tracker} and \textit{Prefabs/HM\_HeatMap} are the elements used by the developer to create heat maps. The rest of the files should normally not be used.
 
 \subsection{Tracking game objects}
 \label{HowToUse_Tracking}
@@ -15,12 +15,12 @@ The OnMouseUp event is only tracked on every call to Update on the game object. 
 
 The tracking interval determines the minimum interval between every breadcrumb in seconds. This value cannot be less than one second\footnote{If the value was lower, it could become a memory hog and take too long to save event info.}.
 
-The save interval is the minimum time between the positions being saved to file\footnote{Like the tracking interval, this value cannot be less than 1. We felt that saving event information more often than breadcrumbs can be tracked makes sense.}. 
+The save interval is the minimum time between the positions being saved to file\footnote{Like the tracking interval, this value cannot be less than 1. We felt that saving event information more often than breadcrumbs can be tracked does not make sense.}. 
 If a game uses a lot of memory, a lower value here would mean less memory is used, but would also mean that the harddrive is accessed more often.
 
-The tracked data is saved in a file named "HeatMapData/HeatMapData YYYY.MM.DD HH.MM.SS.xml"\footnote{Tracked data for individual game objects are saved in folder "HeatMapData/YYYY.MM.DD hh.mm.ss/HeatMapDataNameOfGameObject.xml".}.
+The tracked data is saved in a file named "HeatMapData DATE TIME.xml" in a folder called "HeatMapData". Tracked data for individual game objects are saved with the file name "HeatMapDataNameOfGameObject.xml" in folder "HeatMapData/DATE TIME/".
 
-Because we track this way, tracked object names must be unique. 
+Because we track individual game objects in this manner, the names of tracked game objects must be unique. While this issue can be dealt with by the user of the plug-in, this could certainly be an element to improve in a future version of the plug-in.
 
 \subsubsection{Custom events}
 There are two ways to track custom events. 
@@ -31,12 +31,18 @@ The second way is to modify the \textit{HM\_tracker} script, so that the event i
 
 \subsection{Generating the heat map}
 \label{HowToUse_Generating}
-A copy of the \textit{Heatmapping/Prefab/HM\_HeatMap} prefab should be part of the unity scene hierarchy. The prefab has a script attached that allows for generating heatmap visuals. The \textit{Heat Marker} variable of the script should not be changed. 
+A copy of the \textit{Heatmapping/Prefab/HM\_HeatMap} prefab should be part of the unity scene hierarchy. The prefab has a script attached that allows for generating heat map visuals. The \textit{Heat Marker} variable of the script should not be changed. 
 
 INSERT SCREENSHOT OF HEATMAP OPTIONS
 
 \textit{Heat Marker Scale} determines the scale of the sphere surrounding a tracked event. \textit{Allowed Distance} determines how far away two positions can be from each other before they count as increased density.
 
 \textit{Session Data} lets the user choose from different datasets in the "HeatMapData" folder. Currently, it is only possible to load data files from the "HeatMapData" folder.
+\\Once a data file has been loaded, lists of the objects tracked in the file and their events appear in the editor. Selecting a specific object and/or event type will only heat markers for those objects/events in the scene.
 
-\textit{Generate Heatmap}
+Clicking the \textit{Generate Heatmap} button instantiates heat markers based on the selected data file and the game object / event choices. After the objects are instantiated, the density of the objects are calculated and the colours of the heat markers are set based on their density relative to the highest density.
+
+The \textit{Clear Heatmap Markers} button destroys all objects in the same with the tag "HeatMarker". 
+
+\subsubsection{Loading data from more files}
+Currently the only way to load data from more than one file is to load (and generate) the heat map data one file at a time. This is highly inconvenient, if there are large data sets (as there often is with heat map data. I discuss possible solutions to this problem in section \ref{Issues_MoreFiles} on page \pageref{Issues_MoreFiles}.

@@ -1,10 +1,20 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{How To Use}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Tracking game objects}{section.2}% 3
-\BOOKMARK [3][-]{subsubsection.2.1.1}{Custom events}{subsection.2.1}% 4
-\BOOKMARK [2][-]{subsection.2.2}{Generating the heat map}{section.2}% 5
-\BOOKMARK [1][-]{section.3}{Overview of the Program}{}% 6
-\BOOKMARK [1][-]{section.4}{Performance}{}% 7
-\BOOKMARK [2][-]{subsection.4.1}{Saving data}{section.4}% 8
-\BOOKMARK [2][-]{subsection.4.2}{Generating the heat map}{section.4}% 9
-\BOOKMARK [1][-]{section.5}{Conclusion}{}% 10
+\BOOKMARK [1][-]{section.2}{Project Overview}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Goal of the project}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Plug-in features}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{How To Use}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Tracking game objects}{section.3}% 6
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Custom events}{subsection.3.1}% 7
+\BOOKMARK [2][-]{subsection.3.2}{Generating the heat map}{section.3}% 8
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Loading data from more files}{subsection.3.2}% 9
+\BOOKMARK [1][-]{section.4}{Overview of the Program}{}% 10
+\BOOKMARK [1][-]{section.5}{Performance}{}% 11
+\BOOKMARK [2][-]{subsection.5.1}{Saving data}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.2}{Generating the heat map}{section.5}% 13
+\BOOKMARK [1][-]{section.6}{Issues}{}% 14
+\BOOKMARK [2][-]{subsection.6.1}{Loading data from more files}{section.6}% 15
+\BOOKMARK [2][-]{subsection.6.2}{Heat map generation performance}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.3}{Unique game object names}{section.6}% 17
+\BOOKMARK [2][-]{subsection.6.4}{Lack of Unity 2D-tool support}{section.6}% 18
+\BOOKMARK [1][-]{section.7}{Conclusion}{}% 19
+\BOOKMARK [2][-]{subsection.7.1}{Future Work}{section.7}% 20

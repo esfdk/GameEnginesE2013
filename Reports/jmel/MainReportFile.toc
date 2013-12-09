@@ -1,0 +1,26 @@
+
+\save@tocdepth \setcounter {tocdepth}{2}
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {section}{\numberline {2}Project Overview}{1}{section.2}
+\contentsline {subsection}{\numberline {2.1}Goal of the project}{1}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Plug-in features}{1}{subsection.2.2}
+\contentsline {section}{\numberline {3}How To Use}{1}{section.3}
+\contentsline {subsection}{\numberline {3.1}Tracking game objects}{1}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Custom events}{2}{subsubsection.3.1.1}
+\contentsline {subsection}{\numberline {3.2}Generating the heat map}{2}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Loading data from more files}{2}{subsubsection.3.2.1}
+\contentsline {section}{\numberline {4}Overview of the Program}{3}{section.4}
+\contentsline {section}{\numberline {5}Performance}{3}{section.5}
+\contentsline {subsection}{\numberline {5.1}Saving data}{3}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Generating the heat map}{3}{subsection.5.2}
+\contentsline {section}{\numberline {6}Issues}{3}{section.6}
+\contentsline {subsection}{\numberline {6.1}Loading data from more files}{3}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Heat map generation performance}{3}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Unique game object names}{3}{subsection.6.3}
+\contentsline {subsection}{\numberline {6.4}Lack of Unity 2D-tool support}{3}{subsection.6.4}
+\contentsline {section}{\numberline {7}Conclusion}{3}{section.7}
+\contentsline {subsection}{\numberline {7.1}Future Work}{3}{subsection.7.1}
+\contentsline {paragraph}{Binned heatmap}{3}{subsection.7.1}
+\contentsline {paragraph}{Reducing number of objects in the scene}{3}{subsection.7.1}
+\contentsfinish 
