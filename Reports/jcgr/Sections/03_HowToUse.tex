@@ -1,0 +1,53 @@
+\section{How To Use}
+\label{HowToUse}
+
+As one of our features was that the plug-in should be easy to use, we had a lot of focus on that. We have therefore boiled it down to two parts: Tracking events on objects and generating the heat map.
+
+To use the plug-in, the package (which consists of four folders) needs to be imported. The elements the developer need for for tracking and visualizing are \texttt{Scripts/HM\_Tracker} and \texttt{Prefabs/HM\_HeatMap}. The rest of the files are used internally to handle events, inspector UI, marker colors/transparency, etc.
+
+\subsection{Tracking game objects}
+\label{HowToUse_Tracking}
+
+To track an object, the \texttt{HM\_HeatMap} script must be attached to the object. With the script attached, the developer can change the position tracker interval, save interval and which of the default events that are tracked through the object inspector UI.
+
+\insertPictureS{1}{Tracker_Options}{The tracker options.}{Tracker_Options}
+
+The \textit{Position interval} option determines the minimum amount of seconds between BreadCrumb (see below) events. It cannot be set to less than one second, as setting it lower could possibly become a memory hog and rarely result in any real gains compared to tracking every second.
+
+The \textit{Save interval} option is the minimum amount of seconds between the tracked events being saved to an XML file. It cannot be set to less than one second, as we felt that being able to save more often than tracking the position of an object did not make sense. It is possible, however, if the \textit{Position interval} is set higher than one, but we chose not to limit it more than it is.
+
+The default events the tracker supports are BreadCrumb, Awake, Destroy, OnTriggerEnter and OnMouseUp. 
+
+BreadCrumb is the name of the event that tracks the object's position, and is always activated. It is tracked in the Update method, and will be tracked at the chosen position interval.
+
+Awake, Destroy and OnTriggerEnter are tracked every time the method is called on the object. Calling these methods is something Unity handles internally, and we can assume that without lag, these events will be tracked successfully every time they happen.
+
+OnMouseUp happens as part of the Update method, like the BreadCrumb event. The default amount of calls to Update per second is thirty, so this event cannot be tracked more than thirty times per second.
+
+The tracker will save all events that it is set to track, and every time the \textit{Save interval} is reached, these events will be saved to a file named "HeatMapData/YYYY.MM.DD hh.mm.ss/HeatMapDataNameOfGameObject.xml". When the game finishes, all the individual files will be combined to a single file named "HeatMapData/HeatMapData YYYY.MM.DD HH.MM.SS.xml", which is the one that is used for generating the heat map.
+
+\subsubsection*{Custom Events}
+\label{HowToUse_Tracking_Custom}
+
+While the tracker can track certain events by default, the developer can also use it to track custom events. There are two ways to do this.
+
+The first way is to call the \texttt{AddEvent} method on the attached \texttt{HM\_Tracker} script from another script and pass the event name and position as parameters. This is how we intend for it to work.
+
+The second way is to modify the \texttt{HM\_Tracker} script itself, to allow tracking of the custom event from inside the script.
+
+\subsection{Generating the heat map}
+\label{HowToUse_Generating}
+
+To generate the heat map, the \texttt{HM\_HeatMap} prefab should be placed in the scene. The prefab has the \texttt{HM\_GenerateHeatMap} script attached, which is what generates the heat map. In the object's inspector, the developer has access to the settings of the heat map script.
+
+\insertTwoPicturesS{HeatMap_Options01}{HeatMap_Options02}{The options for generating heat map. Left picture is without any data selected, the right is with data selected.}{HM_Options}
+
+\textit{Heat Marker} is a field that contains the element that is used for visualizing the positions where events happened. The field should contain the \texttt{HM\_HeatMarker} prefab.
+
+\textit{Heat Marker Scale} determines the scale of the objects that surrounds a tracked event (the \textit{Heat Marker} object). \textit{Allowed Distance} determines how far two heat markers can be from each other and still count as being "near" each other.
+
+\textit{Session Data} loads a list of the all XML files in the "HeatMapData/" folder and displays them in a dropdown menu. Upon choosing a file, the \textit{Object} and \textit{Event} options are loaded. \textit{Object} contains a list of all the objects that have been found in the \textit{Session Data} file. \textit{Event} shows a list of all the event types that have been tracked for the chosen object.
+
+The \textit{Generate Heatmap} button will use the chosen parameters to generate markers for each tracked event from the chosen data. It will position the markers in the scene, and color them according to how many other markers that are nearby. Multiple combinations can be visualized at the same time, simply by pressing the button with different data selected.
+
+The \textit{Clear Heatmap Markers} button is used to remove the heat map again by destroying all instances of the heat marker object in the scene.

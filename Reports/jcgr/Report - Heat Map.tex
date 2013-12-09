@@ -63,15 +63,16 @@ breaklines=true}
 \setlength{\headheight}{15.2pt}
 \setlength{\topskip}{20pt}
 \pagestyle{fancy}
-\cfoot{\thepage\ of \pageref{LastPage}}
-\fancypagestyle{plain}{\fancyhf{}\cfoot{\thepage\ af \pageref{LastPage}}
-}
-\fancypagestyle{plain}{
-\fancyhf{}
-\cfoot{\thepage\ af \pageref{LastPage}}
-}
+\lhead{Jacob Grooss}
+\chead{Unity Heat Map Plug-in}
+\rhead{Game Engines-E2013}
+\cfoot{{\thepage} of \pageref{LastPage}}
 
 \captionsetup{labelfont=bf}
+
+
+% Table of contents depth
+\settocdepth{subsection}
 
 % New commands and environments
 \newenvironment{my_itemize}{\begin{itemize}[itemsep=0pt, topsep=0pt, partopsep=0pt]}{\end{itemize}}
@@ -84,12 +85,21 @@ breaklines=true}
         \pagebreak
 }
 
-\newcommand{\refFig}[1]{\textbf{figure \ref{fig:#1}}}
+\newcommand{\refFig}[1]{\textbf{Figure \ref{fig:#1}}}
 
 \newcommand{\insertPicture}[4]{
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=#1\textwidth]{Images/#2}
+	\caption{#3}
+	\label{fig:#4}
+\end{figure}
+}
+
+\newcommand{\insertPictureS}[4]{
+\begin{figure}[ht]
+	\centering
+	\includegraphics[scale=#1]{Images/#2}
 	\caption{#3}
 	\label{fig:#4}
 \end{figure}
@@ -110,19 +120,24 @@ breaklines=true}
 \end{figure}
 }
 
-\newcommand{\insertWPicture}[4]{
-\begin{wrapfigure}{r}{#1\textwidth}
-\begin{center}
-	\includegraphics[width=#1\textwidth]{#2}
-\end{center}
+\newcommand{\insertTwoPicturesS}[4]{
+\begin{figure}[ht]
+\begin{minipage}[b]{0.5\linewidth}
+	\centering
+	\includegraphics[scale=1]{Images/#1}
+\end{minipage}
+\begin{minipage}[b]{0.5\linewidth}
+	\centering
+	\includegraphics[scale=1]{Images/#2}
+\end{minipage}
 \caption{#3}
 \label{fig:#4}
-\end{wrapfigure}
+\end{figure}
 }
 
 % Title
 \title{
-\Huge{Heat Mapping Unity Plugin}\\
+\Huge{Unity Heat Map Plug-in}\\
 \Large{Game Engines E2013}
 \large{\textit{\\IT-University of Copenhagen}}
 }
@@ -134,11 +149,14 @@ breaklines=true}
 \begin{document}
 \thispagestyle{empty}
 \maketitle
-%\skippage
+\tableofcontents
+\skippage
 \input{Sections/01_Intro.tex}
 \input{Sections/02_Overview.tex}
-\input{Sections/03_PluginOverview.tex}
-%\input{Sections/04_HowToUse.tex}
+%\input{Sections/03_PluginOverview.tex}
+\input{Sections/03_HowToUse.tex}
+\input{Sections/04_CodeOverview.tex}
 \input{Sections/05_Performance.tex}
-\input{Sections/06_Conclusion.tex}
+\input{Sections/06_Issues.tex}
+\input{Sections/07_Conclusion.tex}
 \end{document}
