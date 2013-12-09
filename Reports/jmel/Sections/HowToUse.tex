@@ -1,8 +1,42 @@
 \section{How To Use}
 \label{HowToUse}
+The heatmapping plugin consists of two parts: tracking objects and generating the heatmap.
 
-\subsection{Tracking objects}
+To access the plugin, the custom package must be imported. The package consists of 4 folders. \textit{Scripts/HM\_Tracker} and \textit{Prefabs/HM\_HeatMap} are the elements used by the developer to create heatmaps. The rest of the files should not be used.
+
+\subsection{Tracking game objects}
 \label{HowToUse_Tracking}
+To track a game object, the \textit{HM\_Tracker} script must be attached to the object. Attaching the \textit{HM\_Tracker} to an object allows the user to change the tracking interval, save interval and which events that are toggled.
+\\The tracker can record the position of the game object when the following events happen: Breadcrumb (object position at intervals), Awake, onDestroy, OnMouseUp and OnTriggerEnter.
+
+INSERT SCREENSHOT OF TRACKER OPTIONS
+
+The OnMouseUp event is only tracked on every call to Update on the game object. Assuming 30 calls to update per second (30 fps), the tracker will register a maximum of 30 mouse up events per second.
+
+The tracking interval determines the minimum interval between every breadcrumb in seconds. This value cannot be less than one second\footnote{If the value was lower, it could become a memory hog and take too long to save event info.}.
+
+The save interval is the minimum time between the positions being saved to file\footnote{Like the tracking interval, this value cannot be less than 1. We felt that saving event information more often than breadcrumbs can be tracked makes sense.}. 
+If a game uses a lot of memory, a lower value here would mean less memory is used, but would also mean that the harddrive is accessed more often.
+
+The tracked data is saved in a file named "HeatMapData/HeatMapData YYYY.MM.DD HH.MM.SS.xml"\footnote{Tracked data for individual game objects are saved in folder "HeatMapData/YYYY.MM.DD hh.mm.ss/HeatMapDataNameOfGameObject.xml".}.
+
+Because we track this way, tracked object names must be unique. 
+
+\subsubsection{Custom events}
+There are two ways to track custom events. 
+
+The first way is to create a separate script that calls the AddEvent method of the \textit{HM\_Tracker} component on the game object whenever the event happens. This is how we designed custom events to be tracked.
+
+The second way is to modify the \textit{HM\_tracker} script, so that the event is tracked from inside the script itself.
 
 \subsection{Generating the heat map}
 \label{HowToUse_Generating}
+A copy of the \textit{Heatmapping/Prefab/HM\_HeatMap} prefab should be part of the unity scene hierarchy. The prefab has a script attached that allows for generating heatmap visuals. The \textit{Heat Marker} variable of the script should not be changed. 
+
+INSERT SCREENSHOT OF HEATMAP OPTIONS
+
+\textit{Heat Marker Scale} determines the scale of the sphere surrounding a tracked event. \textit{Allowed Distance} determines how far away two positions can be from each other before they count as increased density.
+
+\textit{Session Data} lets the user choose from different datasets in the "HeatMapData" folder. Currently, it is only possible to load data files from the "HeatMapData" folder.
+
+\textit{Generate Heatmap}
