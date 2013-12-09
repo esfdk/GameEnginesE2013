@@ -1,0 +1,36 @@
+\section{Issues}
+\label{Issues}
+
+While the plug-in works, there are some issues with it.
+
+\subsection{Data from multiple files}
+\label{Issues_MoreFiles}
+
+As the plug-in lets the user choose which file to load data from, it is possible to load data from multiple different files. It is cumbersome, however, as the the user will have to choose a file, load the data, choose the next file, load data, etc. Loading data from tens of files or more will end up becoming an annoyance, rather than a helpful tool.
+
+The solution to this, is to allow the user to select multiple files to load data from. Instead of a drop down menu, a menu that allows the user to select which files to load from would be a lot more user friendly.
+
+\subsection{Performance of heat map generation}
+\label{Issues_GenerationPerformance}
+
+As described in section \ref{Testing_Performance_Generating}, generating the heat map becomes slower the more points that are being loaded and processed. 
+
+It becomes slower because the script has iterate over every marker multiple times. The first iteration instantiates each marker and places it in the world, according to the tracked position. The second iteration iterates over all the markers, and, for every marker, counts how many other markers that are near it by checking the distance to every other marker. Lastly, it sets the color of each marker according to the density it had.
+
+How to maek better?!
+
+\subsection{Object names when tracking}
+\label{Issues_UniqueNames}
+
+For each object that is being tracked, the object will create a file named "HeatMapData<objectName>.xml" and open an XmlTextWriter to that file. This causes a problem when multiple objects have the same name, as they will overwrite previous files. For example, if ten \textit{Enemy} objects are being tracked, only the last one to be loaded will have a file to write to, and the other nine will lack the file their writer is linked to. Thus only one object will actually be tracked.
+
+The simple way to solve this problem, is to check if the file already exits, and in that case append a number to the end of the new file name. This would leave a lot of "HeatMapData<objectName><number>.xml" files in the session folder, but as the user will never have to interact with these files, it should not be an issue.
+
+\subsection{Unity 2D tool support}
+\label{Issues_2DSupport}
+
+In version 4.3 of Unity, better 2D tools were. As we were testing the plug-in on other games than the project we created it in, we decided to test it on the 2D Platformer demo, as described in section \ref{Testing_Games_2D}.
+
+We found that the plug-in works when it comes to gathering data and generating a heat map from this data. However, while the heat markers were added to the scene, they were not rendered. We believe it is due to the material being transparent. Creating a default sphere works, but as soon as its material is changed to transparent, it is also not shown.
+
+One way to solve this issue, would be to create a custom texture that retains some sort of transparency, while still being possible to render.

@@ -128,6 +128,8 @@ public class HM_Tracker : MonoBehaviour
 		{
 			trackedEvent.WriteToFile(writer);
 		}
+
+		writer.Flush();
 	}
 
 	/// <summary>
