@@ -7,14 +7,19 @@
 \BOOKMARK [3][-]{subsubsection.3.1.1}{Custom events}{subsection.3.1}% 7
 \BOOKMARK [2][-]{subsection.3.2}{Generating the heat map}{section.3}% 8
 \BOOKMARK [3][-]{subsubsection.3.2.1}{Loading data from more files}{subsection.3.2}% 9
-\BOOKMARK [1][-]{section.4}{Overview of the Program}{}% 10
-\BOOKMARK [1][-]{section.5}{Performance}{}% 11
-\BOOKMARK [2][-]{subsection.5.1}{Saving data}{section.5}% 12
-\BOOKMARK [2][-]{subsection.5.2}{Generating the heat map}{section.5}% 13
-\BOOKMARK [1][-]{section.6}{Issues}{}% 14
-\BOOKMARK [2][-]{subsection.6.1}{Loading data from more files}{section.6}% 15
-\BOOKMARK [2][-]{subsection.6.2}{Heat map generation performance}{section.6}% 16
-\BOOKMARK [2][-]{subsection.6.3}{Unique game object names}{section.6}% 17
-\BOOKMARK [2][-]{subsection.6.4}{Lack of Unity 2D-tool support}{section.6}% 18
-\BOOKMARK [1][-]{section.7}{Conclusion}{}% 19
-\BOOKMARK [2][-]{subsection.7.1}{Future Work}{section.7}% 20
+\BOOKMARK [1][-]{section.4}{Overview of the Plug-in}{}% 10
+\BOOKMARK [1][-]{section.5}{Test}{}% 11
+\BOOKMARK [2][-]{subsection.5.1}{Tested games}{section.5}% 12
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Hiraeth}{subsection.5.1}% 13
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Angry Bots}{subsection.5.1}% 14
+\BOOKMARK [3][-]{subsubsection.5.1.3}{Example 2D-platformer}{subsection.5.1}% 15
+\BOOKMARK [2][-]{subsection.5.2}{Performance test}{section.5}% 16
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Tracking/saving event data}{subsection.5.2}% 17
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Generating the heat map}{subsection.5.2}% 18
+\BOOKMARK [1][-]{section.6}{Issues}{}% 19
+\BOOKMARK [2][-]{subsection.6.1}{Loading data from more files}{section.6}% 20
+\BOOKMARK [2][-]{subsection.6.2}{Heat map generation performance}{section.6}% 21
+\BOOKMARK [2][-]{subsection.6.3}{Unique game object names}{section.6}% 22
+\BOOKMARK [2][-]{subsection.6.4}{Lack of Unity 2D-tool support}{section.6}% 23
+\BOOKMARK [1][-]{section.7}{Conclusion}{}% 24
+\BOOKMARK [2][-]{subsection.7.1}{Future Work}{section.7}% 25

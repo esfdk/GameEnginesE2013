@@ -1,7 +1,20 @@
 \section{Conclusion}
 
 \subsection{Future Work}
-
+In addition to the points I describe in section \ref{Issues}, I would consider implementing an option to generate a binned heat map instead of the 3D spherical version we used for this project.  Additionally I would implement a method to reduce the amount of elements in the scene when generating the heat map.
 \paragraph{Binned heatmap}
+A binned heat map is when the heat markers in the world are predetermined. Every tracked position that falls inside an area (e.g. a 1x1 square) increases the density of that square by 1. 
 
+A binned heat map would take less time to generate than our 3D-spherical version. 3D-spherical version runs at O(N\textsuperscript{2}) and binned heat map would be O(N+M), where \textit{N=number of tracked events} and \textit{M = number of bins}. 
+
+Binned heat maps are generally viewed in a top-down 2D-perspective. This makes them quite good for games / levels that do not have multiple floors.
+
+BINNED HEAT MAP EXAMPLE
+
+\footnote{Source: Game Engines E2013 course Power Point slides: 13\_metrics\_final.ppt}
 \paragraph{Reducing number of objects in the scene}
+The current implementation of our heat map plug-in generates one \textit{HeatMarker} per tracked event that is loaded. This means that if there is a lot of data, there will be very many game objects in the scene. This can slow down the Unity engine (if not cause Out of Memory exceptions), which can be problematic. 
+
+I would suggest implementing  the following method for combining tracked events: If two or more event positions are within allowed range, combine them to one game object and calculate the middle of their positions and use this for the new position.
+
+This would not work in all cases, but it could potentially lead to a very high reduction of the amount of unnecessary objects in the scene.

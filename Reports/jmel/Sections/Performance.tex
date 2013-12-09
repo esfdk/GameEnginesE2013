@@ -1,8 +1,44 @@
-\section{Performance}
-\label{Performance}
+\section{Test}
+\label{Test}
+We tested our plug-in on three different games. An example top-down shooter game called Angry Bots\footnote{Source: https://www.assetstore.unity3d.com/\#/content/12175}, an example 2D-platformer game\footnote{Source: https://www.assetstore.unity3d.com/\#/content/11228} and a first person exploratory game called Hiraeth we made for a different course. We tested these three types of games to see how our heat map plug-in worked in different game types. In addition to testing the three different game types, we also the tested the performance of our plug-in.
 
-\subsection{Saving data}
-\label{Performance_Saving}
+The test was performed on a laptop with 8GB memory, Nvidia Geforce GTX 765M and Intel Core i7 processor (2.4 GHz).
 
-\subsection{Generating the heat map}
-\label{Performance_Generating}
+\subsection{Tested games}
+\label{Test_TG}
+\subsubsection{Hiraeth}
+\label{Test_TG_H}
+Hiraeth features a relatively large square terrain with different height levels. The game was made for the Game Design E2013 course at IT-University of Copenhagen. The plug-in worked as intended. I have included an example screenshot to show the result of about heat mapping about 1.5 hours of playtime.
+
+INSERT SCREENSHOT OF HIRAETH
+
+\subsubsection{Angry Bots}
+\label{Test_TG_AB}
+The Angry Bots game is a top-down shooter where the player moves around and shoots robots. When we tested, we successfully registered breadcrumb events and custom death events for the player game object. When we generated the heat map, the heat markers were very hard to see due to the transparency. Giving the the developer control over the transparency of the heat marker material could be an improvement for cases like this.
+
+INSERT SCREENSHOT OF ANGRY BOTS
+
+INSERT SCREENSHOT WITH CLEARER MARKERS
+
+\subsubsection{Example 2D-platformer}
+\label{Test_TG_2D}
+Tracking the player object worked as expected in the 2D-platformer game, but the rendering of the heat map did not. When we render the heat map, we use a transparent shader to render the 3D-spheres. The 2D-platformer does not support the use of the standard transparent shader of Unity, which means that the objects are not rendered.
+
+\subsection{Performance test}
+\label{Test_P}
+We tested the performance of our plug-in on our own Hiraeth game. This game is the one we had collected most data on, so we decided we could better evaluate the results when testing with this game.
+
+\subsubsection{Tracking/saving event data}
+\label{Test_P_Saving}
+We tested how the much the tracking of events impacted the performance of our game by playing with no objects being tracking and with different amounts of objects being tracked.
+
+\paragraph{Results}
+INSERT TABLE
+
+As shown by the table, even with very many objects tracked at a time (far more than what we would assume is necessary for most games), we could see no impact on the performance of the game. I conclude from that result that the saving/tracking of event data does not need to improved from a performance perspective.
+
+\subsubsection{Generating the heat map}
+\label{Test_P_Generating}
+
+
+\paragraph{Results}

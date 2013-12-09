@@ -1,11 +1,18 @@
 \section{Issues}
 \label{Issues}
-
+In this section I describe the various issues with the implementation of our plug-in.
 \subsection{Loading data from more files}
 \label{Issues_MoreFiles}
+
 \subsection{Heat map generation performance}
 \label{Issues_generationPerformance}
+
 \subsection{Unique game object names}
 \label{Issues_UniqueNames}
+As I mention in section \ref{HowToUse_Tracking}, the names of tracked game objects must be unique. If they are not, an input/output exception occurs and data is not properly recorded. 
+\\To fix this, I would suggest adding a check to see if there is a similar named object being tracked. If there is, create a new file with the same name except with a number at the end. 
+\\Because the render check for all events in a node with a specific name, it does not matter if the objects with the same name end up in different XML nodes when combined on game close.
+
 \subsection{Lack of Unity 2D-tool support}
 \label{Issues_2DSupport}
+With Unity 4.3 came highly improved support for 2D-platformer games\footnote{Source: http://blogs.unity3d.com/2013/08/28/unity-native-2d-tools/}. As mentioned in section \ref{Test_TG_2D}, our plug-in is not very compatible with the 2D tools provided by Unity. Although the positions were tracked, we were not able to render the semi-transparent heat markers used to render the heat map. A possible solution to this problem could be to make the heat markers completely solid.
