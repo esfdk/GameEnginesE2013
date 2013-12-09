@@ -1,38 +1,81 @@
 \section{Testing}
 \label{Testing}
 
+After creating the plug-in, we decided to test it. We wanted to test how easy it was to use in other games, and we wanted to do some performance testing, to see at when the performance of the plug-in fell.
 
+The tests were performed on a laptop with 8GB memory, Nvidia Geforce GTX 765M and Intel Core i7 processor (2.4 GHz).
 
 \subsection{Games}
 \label{Testing_Games}
 
+For the ease-of-use test, we chose three different games: Angry Bots\footnote{https://www.assetstore.unity3d.com/\#/content/12175}, a 2D-platformer game\footnote{https://www.assetstore.unity3d.com/\#/content/11228} and Hiraeth\footnote{https://github.com/esfdk/DarkForest}.
 
+Both Angry Bots and the 2D platformer game are demo projects that can be downloaded off of Unity's website. Hiraeth is a game we made for the Game Design-E2013 course. We tested the plug-in on all three games, to see how easy it was to set up, gather data and generate heat maps from the data.
 
 \subsubsection{Hiraeth}
 \label{Testing_Games_Hiraeth}
 
+Hiraeth is a game that consists of a huge, square piece of terrain with hills and valleys, where the player can walk around and explore the world at their own leisure. Using the heat map plug-in proved to be very easy and it worked as intended. In a few minutes time, we could track data and generate heat maps. See \refFig{H_01} for a part of the heat map.
+
 \insertPicture{0.95}{Hiraeth_01}{A heat map generated in Hiraeth.}{H_01}
 
-\subsubsection{AngryBots}
+\subsubsection{Angry Bots}
 \label{Testing_Games_AB}
 
-%\insertPicture{0.8}{Test_AngryBots}{A heat map generated for Angry Bots.}{AB_01}
+Angry Bots is a top-down shooter game, where the player moves through a space station, killing enemy robots in the player's way, while unlocking doors to progress further. For this game, we tested both the default BreadCrumb event, but also a custom death event for the player. Both were tracked successfully.
+
+Generating the heat map went easy enough, but the markers were almost too transparent to be seen (see \refFig{AB_01} for an example), so we turned the transparency down. Giving the developers an easy way to control the transparency would be a good idea for future work.
+
 \insertTwoPictures{Test_AngryBots}{Test_AngryBots_Transparancy}{Derp}{AB_01}
 
 \subsubsection{2D Platformer}
 \label{Testing_Games_2D}
 
-No pic
+Like the two other games, installing the plug-in was easy. So was gathering data and generating the heat map. However, due to the game using Unity's new 2D tools, the markers were not rendered. This is because they use the default transparent shader, which is not rendered by the 2D tools.
 
 \subsection{Performance}
 \label{Testing_Performance}
 
+For the performance test, we decided to test on Hiraeth, as it was the game we were more familiar with and the one we had the most data for. We wanted to test the performance when it came to tracking a lot of objects and how fast the heat map could be generated.
 
-\subsubsection{Saving data}
-\label{Testing_Performance_Saving}
+\subsubsection{Object tracking}
+\label{Testing_Performance_Tracking}
 
+For the object tracking, we chose a certain amount of elements and attached the \texttt{HM\_Tracker} script to them. Then we started the game and looked for any drops in performance, be it frame rate loss or stutters when data was being saved.
 
+We used the default values (\textit{Position interval} 1 \& \textit{Save interval} 10) for all the objects, in an attempt to make as much data writing happen at the same time as possible.
+
+\begin{center}
+	\begin{tabular}{| c | c | c |}
+		\hline
+		Test number & Elements tracked & Impact \\ \hline
+		1 & 10 & No noticeable impact \\ \hline
+		2 & 20 & No noticeable impact \\ \hline
+		3 & 70 & No noticeable impact \\
+		\hline
+	\end{tabular}
+\end{center}
+
+As can be seen from the table, we tracked up to seventy objects simultaneously, which we consider to be a lot more objects than most will need to track simultaneous. Even with that many objects, there was no impact on the performance.
+
+From this data, we can conclude that tracking and saving of data does not need to be improved from a performance perspective.
 
 \subsubsection{Generating the heat map}
 \label{Testing_Performance_Generating}
 
+For the heat map generation, we decided to take one of our large datasets and load it multiple times. Each time we would note the amount of events loaded and the time it took to load the new event and process both them and the old events.
+
+\begin{center}
+	\begin{tabular}{| c | c | c |}
+		\hline
+		Test number & Events loaded & Time in seconds \\ \hline
+		1 & 3224 & 34.758 \\ \hline
+		2 & 6448 & 86.753 \\ \hline
+		3 & ??? & No noticeable impact \\
+		\hline
+	\end{tabular}
+\end{center}
+
+From the table, it is easy to see that it takes a lot of time to load many events. This is because each time a heat map is generated, each marker needs to iterate over all the other markers to figure out which ones are close to it. After that, each of them needs to have their color change. This gives a run time of $O(n^2) + n$, which is very slow.
+
+While 6448 events are a lot, it is very possible that some heat maps would be working with that - and higher - numbers. It is therefore an area that could do with improvements, which is discussed in section \ref{Issues_GenerationPerformance}.

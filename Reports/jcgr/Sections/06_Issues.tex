@@ -31,8 +31,6 @@ The simple way to solve this problem, is to check if the file already exits, and
 \subsection{Unity 2D tool support}
 \label{Issues_2DSupport}
 
-In version 4.3 of Unity, better 2D tools were. As we were testing the plug-in on other games than the project we created it in, we decided to test it on the 2D Platformer demo, as described in section \ref{Testing_Games_2D}.
+In version 4.3 of Unity, better 2D tools were added. As described in section \ref{Testing_Games_2D}, we found that the plug-in works when it comes to gathering data and generating a heat map from this data. However, while the heat markers were added to the scene, they were not rendered.
 
-We found that the plug-in works when it comes to gathering data and generating a heat map from this data. However, while the heat markers were added to the scene, they were not rendered. We believe it is due to the material being transparent. Creating a default sphere works, but as soon as its material is changed to transparent, it is also not shown.
-
-One way to solve this issue, would be to create a custom texture that retains some sort of transparency, while still being possible to render.
+One way to solve this issue, would be to create a custom shader that retains some sort of transparency, while still being possible to render.
