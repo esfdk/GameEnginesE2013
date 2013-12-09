@@ -77,6 +77,8 @@ public class HM_Tracker : MonoBehaviour
 		{
 			eventsLogged.Add(new HM_Event(HM_EventTypes.Destroy, transform.position));
 		}
+		
+		StopTracking();
 	}
 
 	void OnTriggerEnter()
@@ -91,6 +93,11 @@ public class HM_Tracker : MonoBehaviour
 	/// Saves the remaining tracked data and closes the writers.
 	/// </summary>
 	void OnApplicationQuit()
+	{
+		StopTracking();
+	}
+	
+	void StopTracking()
 	{
 		this.SaveToFile();
 
