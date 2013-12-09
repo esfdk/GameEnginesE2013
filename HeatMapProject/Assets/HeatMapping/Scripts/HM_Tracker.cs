@@ -40,13 +40,15 @@ public class HM_Tracker : MonoBehaviour
 	void Update () 
 	{
 		saveTimer += Time.deltaTime;
-		
+
+		// Tracks the object's position every interval.
 		if (Time.time > _lastBreadCrumb + breadCrumbInterval)
 		{
 			_lastBreadCrumb = Time.time;
 			eventsLogged.Add(new HM_Event(HM_EventTypes.BreadCrumb, transform.position));
 		}
-
+		
+		// Tracks the object if OnMouseUp is to be tracked.
 		if (TrackedEvents.Contains(HM_EventTypes.OnMouseUp))
 		{
 			if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1) || Input.GetMouseButtonUp(2))
@@ -55,6 +57,7 @@ public class HM_Tracker : MonoBehaviour
 			}
 		}
 
+		// Saves the events to a file.
 		if(saveTimer >= saveInterval)
 		{
 			saveTimer = 0;
@@ -65,6 +68,7 @@ public class HM_Tracker : MonoBehaviour
 	
 	void Awake()
 	{
+		// Tracks the object if Awake is to be tracked.
 		if (TrackedEvents.Contains(HM_EventTypes.Awake))
 		{
 			eventsLogged.Add(new HM_Event(HM_EventTypes.Awake, transform.position));
@@ -73,6 +77,7 @@ public class HM_Tracker : MonoBehaviour
 
 	void onDestroy()
 	{
+		// Tracks the object if onDestroy is to be tracked.
 		if (TrackedEvents.Contains(HM_EventTypes.Destroy))
 		{
 			eventsLogged.Add(new HM_Event(HM_EventTypes.Destroy, transform.position));
@@ -81,6 +86,7 @@ public class HM_Tracker : MonoBehaviour
 
 	void OnTriggerEnter()
 	{
+		// Tracks the object if OnTiggerEnter is to be tracked.
 		if (TrackedEvents.Contains(HM_EventTypes.OnTriggerEnter))
 		{
 			eventsLogged.Add(new HM_Event(HM_EventTypes.OnTriggerEnter, transform.position));
