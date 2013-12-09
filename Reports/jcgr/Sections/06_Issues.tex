@@ -17,7 +17,9 @@ As described in section \ref{Testing_Performance_Generating}, generating the hea
 
 It becomes slower because the script has iterate over every marker multiple times. The first iteration instantiates each marker and places it in the world, according to the tracked position. The second iteration iterates over all the markers, and, for every marker, counts how many other markers that are near it by checking the distance to every other marker. Lastly, it sets the color of each marker according to the density it had.
 
-How to maek better?!
+Binned heat map
+
+Process data separately.
 
 \subsection{Object names when tracking}
 \label{Issues_UniqueNames}
