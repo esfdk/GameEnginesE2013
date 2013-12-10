@@ -3,12 +3,9 @@
 
 The \texttt{Scripts/HM\_Tracker} and \texttt{Prefabs/HM\_HeatMap} may be the most important parts for the user, but there are a lot of other things that are used behind the scenes in order for the plug/in to work.
 
-\subsection{Folder structure}
-\label{Overview_Folder}
-
 The plug-in contains four folders: \textit{Editor}, \textit{Plugins}, \textit{Prefabs} and \textit{Scripts}.
 
-\subsubsection*{Editor}
+\subsection{Editor}
 \label{Overview_Folder_Editor}
 
 The \textit{Editor} folder contains two C\# files: \texttt{HM\_GenerateHeatMapEditor} and \texttt{HM\_TackerEditor}. These files do not extend \texttt{MonoBehaviour} and can therefore not be attached to any game object. Instead, they extend \texttt{Editor} which allows them to modify the object inspector for another script. 
@@ -25,33 +22,105 @@ if(GUILayout.Button("Generate Heatmap", GUILayout.Height(30)))
 GUILayout.EndHorizontal();
 \end{lstlisting}
 
-\subsubsection*{Plugins}
+\subsection{Plugins}
 \label{Overview_Folder_Plugins}
 
 The \textit{Plugins} folder contains two script: \texttt{Colorx} and \texttt{HSBColor}, both of them written by Jonatha Czeck, Graveck Interactive 2006. We use them to control the color of the heat markers in the scene, as they allow for smoother transitioning between colors.
 
-\subsubsection*{Prefabs}
+\subsection{Prefabs}
 \label{Overview_Folder_Prefabs}
 
 The \textit{Prefabs} folder contains two game objects: \texttt{HM\_HeatMap} and \texttt{HM\_HeatMarker}. The \texttt{HM\_HeatMap} prefab was explained in section \ref{HowToUse_Generating}, so I will skip that for now. \texttt{HM\_HeatMarker} is a sphere with the \texttt{HM\_HeatMarkerScript} attached. The heat map is visualized by placing one marker at each event in the scene, and the frequency of the event in that area is visualized by changing the color of the marker.
 
-\subsubsection*{Scripts}
+\subsection{Scripts}
 \label{Overview_Folder_Scripts}
 
-The \textit{Scripts} folder contains the scripts that do not modify the object inspector or have been written by other people.
+The \textit{Scripts} folder contains the scripts we have written for the plug-in that do not modify the object inspector.
 
-\begin{itemize}
+\subsubsection*{HM\_ControlObjectScript}
 
-        \item The \texttt{HM\_ControlObjectScript} script is put on a dummy object that is generated when the game starts. It ensures that only one folder is created for the data gathering session, and it takes care of combining the data for the different objects when the game ends.
+The \texttt{HM\_ControlObjectScript} script is put on a dummy object that is generated when the game starts. It ensures that only one folder is created for the data gathering session, and it takes care of combining the data for the different objects when the game ends.
 
-        \item The \texttt{HM\_Event} script is very basic. It holds the type of event and the position at which it happened and can write this data to an XML file.
+\lstCode{Creating the directory for the session}{OFS_00}
+\begin{lstlisting}
+	directory = Directory.GetCurrentDirectory() + "\\HeatMapData";
+	sessionName = string.Empty + System.DateTime.Now.ToString(@"yyyy.MM.dd HH.mm.ss");
+				
+	if(!Directory.Exists(directory))
+	{
+		Directory.CreateDirectory(directory);
+	}
+	
+	if (!Directory.Exists(directory + "\\" + sessionName))
+	{
+		Directory.CreateDirectory(directory + "\\" + sessionName);
+	}
+\end{lstlisting}
 
-        \item The \texttt{HM\_EventTypes} script holds the default type of events the plugin can track.
+\subsubsection*{HM\_Event}
 
-        \item The \texttt{HM\_GenerateHeatMap} script takes care of generating the heat map based on the data gathered, and it creates and places the markers in the world. The data it uses is chosen through the Unity inspector options (see section \ref{HowToUse_Generating}).
+The \texttt{HM\_Event} script is very basic. It holds the type of event and the position at which it happened and can write this data to an XML file (see \refCode{OFS_01} on page \pageref{code:OFS_01}).
 
-        \item The \texttt{HM\_HeatMarkerScript} script is placed on the \texttt{HM\_HeatMarker} objects, and is used to change the color on the marker.
+\lstCode{The method the event uses to write its data to a file.}{OFS_01}
+\begin{lstlisting}
+public void WriteToFile(XmlTextWriter writer)
+{
+	writer.WriteStartElement(eventName);
+	writer.WriteAttributeString("x", position.x.ToString());
+	writer.WriteAttributeString("y", position.y.ToString());
+	writer.WriteAttributeString("z", position.z.ToString());
+	writer.WriteEndElement();
+}
+\end{lstlisting}
 
-        \item The \texttt{HM\_Tracker} script is placed on the object one wants to gather data for (see setion \ref{HowToUse_Tracking}). It will track the object's position by default and can be set up to track some other events as well. It will save this data to an XML file for the session that is in progress (determined by the \texttt{HM\_ControlObjectScript} script).
+\subsubsection*{HM\_EventTypes}
 
-\end{itemize}
+The \texttt{HM\_EventTypes} script holds the default type of events the plugin can track.
+
+\subsubsection*{HM\_GenerateHeatMap}
+
+The \texttt{HM\_GenerateHeatMap} script takes care of generating the heat map based on the data gathered, and it creates and places the markers in the world. The data it uses is chosen through the Unity inspector options (see section \ref{HowToUse_Generating}).
+
+\lstCode{Reading the tracked events and instantiating the markers.}{OFS_02}
+\begin{lstlisting}
+	XmlNodeList xnlNodes = xelRoot.SelectNodes("/TrackingData/" + actualObject + "/" + actualEvent);
+	
+	// Iterate over all the event nodes and create markers for them.
+	foreach(XmlNode node in xnlNodes)
+	{
+		var x = float.Parse(node.Attributes["x"].Value);
+		var y = float.Parse(node.Attributes["y"].Value);
+		var z = float.Parse(node.Attributes["z"].Value);
+		var hm = (GameObject) Instantiate(HeatMarker, new Vector3(x, y, z), new Quaternion(0,0,0,0));
+		hm.transform.localScale = new Vector3(HeatMarkerScale, HeatMarkerScale, HeatMarkerScale);
+		hm.transform.parent = this.transform;
+	}
+\end{lstlisting}
+
+\subsubsection*{HM\_HeatMarkerScript}
+
+The \texttt{HM\_HeatMarkerScript} script is placed on the \texttt{HM\_HeatMarker} objects, and is used to change the color on the marker. To do this, it has to create a new material for itself and set both the color and transparency of this material (see \refCode{OFS_03} on page \pageref{code:OFS_03}).
+
+\lstCode{Creating and using a new material.}{OFS_03}
+\begin{lstlisting}
+public void SetColor(Color color)
+{
+	var tempMat = new Material(Shader.Find ("Transparent/Diffuse"));
+	tempMat.color = color;
+	renderer.material = tempMat;
+}
+\end{lstlisting}
+
+\subsubsection*{HM\_Tracker}
+
+The \texttt{HM\_Tracker} script is placed on the object one wants to gather data for (see setion \ref{HowToUse_Tracking}). It will track the object's position by default and can be set up to track some other events as well (see \refCode{OFS_04} on page \pageref{code:OFS_04} for the code that is used to track other events). It will save this data to an XML file for the session that is in progress (determined by the \texttt{HM\_ControlObjectScript} script).
+
+\lstCode{Tracking an event if the event should be tracked.}{OFS_04}
+\begin{lstlisting}
+	// Tracks the object if OnTiggerEnter is to be tracked.
+	if (TrackedEvents.Contains(HM_EventTypes.OnTriggerEnter))
+	{
+		eventsLogged.Add(new HM_Event(HM_EventTypes.OnTriggerEnter, transform.position));
+	}
+\end{lstlisting}
+
