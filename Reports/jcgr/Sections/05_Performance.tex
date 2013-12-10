@@ -70,12 +70,14 @@ For the heat map generation, we decided to take one of our large datasets and lo
 		\hline
 		Test number & Events loaded & Time in seconds \\ \hline
 		1 & 3224 & 37.081 \\ \hline
-		2 & 6448 & 92.760 \\ \hline
-		3 & 9672 & 169.625 \\
+		2 & 6448 & 61.844 \\ \hline
+		3 & 9672 & 129.206 \\ \hline
+		4 & 12896 & 218.894 \\ \hline
+		5 & 16120 & 325.748 \\
 		\hline
 	\end{tabular}
 \end{center}
 
 From the table, it is easy to see that it takes a lot of time to load many events. This is because each time a heat map is generated, each marker needs to iterate over all the other markers to figure out which ones are close to it. After that, each of them needs to have their color change. This gives a run time of $O(n^2 + n)$ (or simply just $O(n^2)$), which is way too slow to be used for large amounts of data.
 
-While 9672 events are a lot, it is very possible that some heat maps would be working with that - and higher - numbers. It is therefore an area that could do with improvements, which is discussed in section \ref{Issues_GenerationPerformance}.
+While 16120 events are a lot, it is very possible that some heat maps would be working with that - and higher - numbers. It is therefore an area that could do with improvements, which is discussed in section \ref{Issues_GenerationPerformance}.
