@@ -5,7 +5,7 @@ In addition to the points I describe in section \ref{Issues}, I would consider i
 \paragraph{Binned heatmap}
 A binned heat map is when the heat markers in the world are predetermined. Every tracked position that falls inside an area (e.g. a 1x1 square) increases the density of that square by 1. 
 
-A binned heat map would take less time to generate than our 3D-spherical version. 3D-spherical version runs at O(N\textsuperscript{2}) and binned heat map would be O(N+M), where \textit{N=number of tracked events} and \textit{M = number of bins}. 
+A binned heat map would take less time to generate than our 3D-spherical version. 3D-spherical version runs at O(n\textsuperscript{2}) and binned heat map would be O(n+m), where \textit{n=number of tracked events} and \textit{n = number of bins}. 
 
 Binned heat maps are generally viewed in a top-down 2D-perspective. This makes them quite good for games / levels that do not have multiple floors.
 
