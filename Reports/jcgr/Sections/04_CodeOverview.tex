@@ -33,7 +33,25 @@ The \textit{Plugins} folder contains two script: \texttt{Colorx} and \texttt{HSB
 \subsubsection*{Prefabs}
 \label{Overview_Folder_Prefabs}
 
-
+The \textit{Prefabs} folder contains two game objects: \texttt{HM\_HeatMap} and \texttt{HM\_HeatMarker}. The \texttt{HM\_HeatMap} prefab was explained in section \ref{HowToUse_Generating}, so I will skip that for now. \texttt{HM\_HeatMarker} is a sphere with the \texttt{HM\_HeatMarkerScript} attached. The heat map is visualized by placing one marker at each event in the scene, and the frequency of the event in that area is visualized by changing the color of the marker.
 
 \subsubsection*{Scripts}
 \label{Overview_Folder_Scripts}
+
+The \textit{Scripts} folder contains the scripts that do not modify the object inspector or have been written by other people.
+
+\begin{itemize}
+
+        \item The \texttt{HM\_ControlObjectScript} script is put on a dummy object that is generated when the game starts. It ensures that only one folder is created for the data gathering session, and it takes care of combining the data for the different objects when the game ends.
+
+        \item The \texttt{HM\_Event} script is very basic. It holds the type of event and the position at which it happened and can write this data to an XML file.
+
+        \item The \texttt{HM\_EventTypes} script holds the default type of events the plugin can track.
+
+        \item The \texttt{HM\_GenerateHeatMap} script takes care of generating the heat map based on the data gathered, and it creates and places the markers in the world. The data it uses is chosen through the Unity inspector options (see section \ref{HowToUse_Generating}).
+
+        \item The \texttt{HM\_HeatMarkerScript} script is placed on the \texttt{HM\_HeatMarker} objects, and is used to change the color on the marker.
+
+        \item The \texttt{HM\_Tracker} script is placed on the object one wants to gather data for (see setion \ref{HowToUse_Tracking}). It will track the object's position by default and can be set up to track some other events as well. It will save this data to an XML file for the session that is in progress (determined by the \texttt{HM\_ControlObjectScript} script).
+
+\end{itemize}

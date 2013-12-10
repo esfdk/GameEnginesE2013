@@ -1,1 +1,13 @@
 \section{Conclusion}
+\label{Conclusion}
+
+
+
+\subsection{Future work}
+\label{Conclusion_Future}
+
+If we were to keep developing this tool, there are a few things I would like to change.
+
+The main thing to do, would be to let the developer choose whether he wants the 3D heat map or a binned heat map (see section \ref{Issues_GenerationPerformance} on page \pageref{Issues_GenerationPerformance}). This would allow the developer to choose between getting a very detailed heat map at the cost of time, or getting a heat map faster at the cost of perfect precision.
+
+Apart from the other things discussed in section \ref{Issues}, a change to how markers are placed in the world would be in order. Currently, there is a marker for every loaded event, which is a lot of markers, which can slow down Unity. To reduce this problem, one could combine markers if they are close enough to each other. Simply remove the markers and place a new one at a point between them. This would reduce the amount of marker objects in the scene, without giving up too much precision. This should of course be something the developer can choose to use, not something they are forced to do.
