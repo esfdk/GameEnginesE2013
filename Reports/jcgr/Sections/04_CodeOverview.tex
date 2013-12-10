@@ -1,7 +1,39 @@
 \section{Overview of the Plug-in}
+\label{Overview}
 
-PHPHPHPHPHPHPH
+The \texttt{Scripts/HM\_Tracker} and \texttt{Prefabs/HM\_HeatMap} may be the most important parts for the user, but there are a lot of other things that are used behind the scenes in order for the plug/in to work.
 
-\subsection{Placeholder}
+\subsection{Folder structure}
+\label{Overview_Folder}
 
-PHPHPHPHPHPHPH
+The plug-in contains four folders: \textit{Editor}, \textit{Plugins}, \textit{Prefabs} and \textit{Scripts}.
+
+\subsubsection*{Editor}
+\label{Overview_Folder_Editor}
+
+The \textit{Editor} folder contains two C\# files: \texttt{HM\_GenerateHeatMapEditor} and \texttt{HM\_TackerEditor}. These files do not extend \texttt{MonoBehaviour} and can therefore not be attached to any game object. Instead, they extend \texttt{Editor} which allows them to modify the object inspector for another script. 
+
+In order for the scripts to modify the inspector, the scripts use the \texttt{GUILayout} class as seen in \refCode{OFE_01}. This class gives access to buttons, labels, dropdown menus, etc. It also allows the script to access different ways of grouping the created GUI elements.\\
+
+\lstCode{The code needed to create a button in the Object Inspector and make something happen when it is clicked.}{OFE_01}
+\begin{lstlisting}[language=C]
+GUILayout.BeginHorizontal();
+if(GUILayout.Button("Generate Heatmap", GUILayout.Height(30)))
+{
+	generateHeatMapScript.Generate();
+}
+GUILayout.EndHorizontal();
+\end{lstlisting}
+
+\subsubsection*{Plugins}
+\label{Overview_Folder_Plugins}
+
+The \textit{Plugins} folder contains two script: \texttt{Colorx} and \texttt{HSBColor}, both of them written by Jonatha Czeck, Graveck Interactive 2006. We use them to control the color of the heat markers in the scene, as they allow for smoother transitioning between colors.
+
+\subsubsection*{Prefabs}
+\label{Overview_Folder_Prefabs}
+
+
+
+\subsubsection*{Scripts}
+\label{Overview_Folder_Scripts}

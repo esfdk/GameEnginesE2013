@@ -58,6 +58,7 @@
 numbers = left,
 linewidth=\linewidth,
 breaklines=true}
+\renewcommand{\lstlistingname}{Code}
 
 % Page style
 \setlength{\headheight}{15.2pt}
@@ -69,6 +70,52 @@ breaklines=true}
 \cfoot{{\thepage} of \pageref{LastPage}}
 
 \captionsetup{labelfont=bf}
+
+% Code style
+\definecolor{bluekeywords}{rgb}{0,0,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.64,0.08,0.08}
+\definecolor{xmlcomments}{rgb}{0.5,0.5,0.5}
+\definecolor{types}{rgb}{0.17,0.57,0.68}
+
+\lstset{language=[Sharp]C,
+captionpos=b,
+%numbers=left, %Nummerierung
+%numberstyle=\tiny, % kleine Zeilennummern
+frame=lines, % Oberhalb und unterhalb des Listings ist eine Linie
+showspaces=false,
+showtabs=false,
+breaklines=true,
+showstringspaces=false,
+breakatwhitespace=true,
+escapeinside={(*@}{@*)},
+commentstyle=\color{greencomments},
+morecomment=[l]{//}, %use comment-line-style!
+morecomment=[s]{/*}{*/}, %for multiline comments
+morekeywords={  abstract, event, new, struct,
+                as, explicit, null, switch,
+                base, extern, object, this,
+                bool, false, operator, throw,
+                break, finally, out, true,
+                byte, fixed, override, try,
+                case, float, params, typeof,
+                catch, for, private, uint,
+                char, foreach, protected, ulong,
+                checked, goto, public, unchecked,
+                class, if, readonly, unsafe,
+                const, implicit, ref, ushort,
+                continue, in, return, using,
+                decimal, int, sbyte, virtual,
+                default, interface, sealed, volatile,
+                delegate, internal, short, void,
+                do, is, sizeof, while,
+                double, lock, stackalloc,
+                else, long, static,
+                enum, namespace, string},
+keywordstyle=\color{bluekeywords},
+stringstyle=\color{redstrings},
+basicstyle=\ttfamily\small,
+}
 
 
 % Table of contents depth
@@ -85,7 +132,10 @@ breaklines=true}
         \pagebreak
 }
 
+\newcommand{\lstCode}[2]{\lstset{caption=#1,label=code:#2}}
+
 \newcommand{\refFig}[1]{\textbf{Figure \ref{fig:#1}}}
+\newcommand{\refCode}[1]{\textbf{Code \ref{code:#1}}}
 
 \newcommand{\insertPicture}[4]{
 \begin{figure}[ht]
@@ -154,10 +204,10 @@ breaklines=true}
 \input{Sections/01_Intro.tex}
 \input{Sections/02_Overview.tex}
 %\input{Sections/03_PluginOverview.tex}
-\pagebreak
+%\pagebreak
 \input{Sections/03_HowToUse.tex}
 \input{Sections/04_CodeOverview.tex}
-\pagebreak
+%\pagebreak
 \input{Sections/05_Performance.tex}
 \input{Sections/06_Issues.tex}
 \input{Sections/07_Conclusion.tex}
