@@ -25,6 +25,7 @@
 \usepackage{appendix}
 \usepackage{savefnmark}
 \usepackage{verbatim}
+\usepackage{tocloft}
 
 
 % Chapter and section spacings
@@ -67,7 +68,7 @@ breaklines=true}
 \cfoot{{\thepage} of \pageref{LastPage}}
 
 % Table of contents depth
-\settocdepth{subsection}
+\settocdepth{section}
 
 % New commands and environments
 \newenvironment{my_itemize}{\begin{itemize}[itemsep=0pt, topsep=0pt, partopsep=0pt]}{\end{itemize}}
@@ -153,4 +154,7 @@ breaklines=true}
 \input{Sections/Performance.tex}
 \input{Sections/Issues.tex}
 \input{Sections/Conclusion.tex}
+\cftaddtitleline{toc}{section}{2D-platformer project report}{}
+\cftaddtitleline{toc}{section}{Wireframe renderer project report}{}
+\cftaddtitleline{toc}{section}{Pathfinding project report}{}
 \end{document}

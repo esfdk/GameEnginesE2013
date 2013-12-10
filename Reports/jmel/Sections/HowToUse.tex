@@ -2,14 +2,14 @@
 \label{HowToUse}
 The heat mapping plug-in consists of two parts: tracking objects and generating the heat map.
 
-To access the plug-in, the custom package must be imported. The package consists of 4 folders. \textit{Scripts/HM\_Tracker} and \textit{Prefabs/HM\_HeatMap} are the elements used by the developer to create heat maps. The rest of the files should normally not be used.
+To access the plug-in, the custom package must be imported. The package consists of 4 folders. \textit{Scripts/HM\_Tracker} and \textit{Prefabs/HM\_HeatMap} are the elements used by the developer to track events and visualise heat maps. The rest of the files are used internally in the plug-in.
 
 \subsection{Tracking game objects}
 \label{HowToUse_Tracking}
 To track a game object, the \textit{HM\_Tracker} script must be attached to the object. Attaching the \textit{HM\_Tracker} to an object allows the user to change the tracking interval, save interval and which events that are toggled.
 \\The tracker can record the position of the game object when the following events happen: Breadcrumb (object position at intervals), Awake, onDestroy, OnMouseUp and OnTriggerEnter.
 
-INSERT SCREENSHOT OF TRACKER OPTIONS
+\insertPictureS{1}{Tracker_Options}{The tracker options.}{Tracker_Options}
 
 The OnMouseUp event is only tracked on every call to Update on the game object. Assuming 30 calls to update per second (30 fps), the tracker will register a maximum of 30 mouse up events per second.
 
@@ -33,7 +33,7 @@ The second way is to modify the \textit{HM\_tracker} script, so that the event i
 \label{HowToUse_Generating}
 A copy of the \textit{Heatmapping/Prefab/HM\_HeatMap} prefab should be part of the unity scene hierarchy. The prefab has a script attached that allows for generating heat map visuals. The \textit{Heat Marker} variable of the script should not be changed. 
 
-INSERT SCREENSHOT OF HEATMAP OPTIONS
+\insertTwoPicturesS{HeatMap_Options01}{HeatMap_Options02}{The options for generating heat map. Left picture is without any data selected, the right is with data selected.}{HM_Options}
 
 \textit{Heat Marker Scale} determines the scale of the sphere surrounding a tracked event. \textit{Allowed Distance} determines how far away two positions can be from each other before they count as increased density.
 

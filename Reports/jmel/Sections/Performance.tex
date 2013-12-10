@@ -8,17 +8,16 @@ The test was performed on a laptop with 8GB memory, Nvidia Geforce GTX 765M and 
 \label{Test_TG}
 \subsubsection{Hiraeth}
 \label{Test_TG_H}
-Hiraeth features a relatively large square terrain with different height levels. The game was made for the Game Design E2013 course at IT-University of Copenhagen. The plug-in worked as intended. I have included an example screenshot to show the result of about heat mapping about 1.5 hours of playtime.
 
-INSERT SCREENSHOT OF HIRAETH
+\insertPicture{0.95}{Hiraeth_01}{A heat map generated in Hiraeth.}{H_01}
+
+Hiraeth features a relatively large square terrain with different height levels. The game was made for the Game Design E2013 course at IT-University of Copenhagen. The plug-in worked as intended. I have included an example screenshot to show the result of about heat mapping about 1.5 hours of playtime.
 
 \subsubsection{Angry Bots}
 \label{Test_TG_AB}
-The Angry Bots game is a top-down shooter where the player moves around and shoots robots. When we tested, we successfully registered breadcrumb events and custom death events for the player game object. When we generated the heat map, the heat markers were very hard to see due to the transparency. Giving the the developer control over the transparency of the heat marker material could be an improvement for cases like this.
+The Angry Bots game is a top-down shooter where the player moves around and shoots robots. When we tested, we successfully registered breadcrumb events and custom death events for the player game object. When we generated the heat map, the heat markers were very hard to see due to the transparency (see figure \refFig{AB_01} on page \pageref{fig:AB_01}). Giving the the developer control over the transparency of the heat marker material could be an improvement for cases like this.
 
-INSERT SCREENSHOT OF ANGRY BOTS
-
-INSERT SCREENSHOT WITH CLEARER MARKERS
+\insertTwoPictures{Test_AngryBots}{Test_AngryBots_Transparancy}{Angry Bots heat map with different levels of transparency.}{AB_01}
 
 \subsubsection{Example 2D-platformer}
 \label{Test_TG_2D}
@@ -61,13 +60,27 @@ Test number & Events loaded & Time in seconds \\
 \hline
 1 & 3224 & 37.081 \\ 
 \hline
-2 & 6448 & 92.760 \\ 
+2 & 3224 & 35.106 \\ 
 \hline
-3 & 9672 & 169.625 \\
+3 & 6448 & 61.844 \\ 
 \hline
-4 & 12896 &  \\
+4 & 6448 & 86.323 \\ 
 \hline
-5 & 16120 &  \\
+5 & 9672 & 169.625 \\
+\hline
+6 & 9672 &  129.206 \\
+\hline
+7 & 12896 & 238.759 \\
+\hline
+8 & 12896 & 218.894 \\
+\hline
+9 & 16120 & 311.298 \\
+\hline
+10 & 16120 & 325.748 \\
+\hline
+11 & 19344 & 443.752 \\
+\hline 
+12 & 22568 & 581.286 \\
 \hline
 \end{tabular}
 \end{center}

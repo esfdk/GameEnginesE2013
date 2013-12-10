@@ -1,4 +1,11 @@
 \section{Conclusion}
+The goal of the project was to create a Unity plug-in that was capable of tracking events and rendering a heat map. Based on the results of our testing, I conclude that the plug-in lives up to the requirements we set for the project.
+
+The plug-in is capable of tracking any kind of event on chosen game objects by either using the default events or creating custom events based on the needs of the developer. When generating a heat map, the user is able to select which game object and which event types to generate heat markers for.
+
+As seen in the screenshots from the Hiraeth and Angry Bots games in section \ref{Test}, the quality of the heat map visuals are not stellar, but I believe they are of an acceptable quality. As mentioned in the \nameref{Test} section, an improvement on this could be to give the user more control over the colours, the transparency and the object shape. 
+
+There are issues with the plug-in, as described in section \ref{Issues} and the focus should be on remedying these problems if more work were to be done on the project. 
 
 \subsection{Future Work}
 In addition to the points I describe in section \ref{Issues}, I would consider implementing an option to generate a binned heat map instead of the 3D spherical version we used for this project.  Additionally I would implement a method to reduce the amount of elements in the scene when generating the heat map.
@@ -7,11 +14,9 @@ A binned heat map is when the heat markers in the world are predetermined. Every
 
 A binned heat map would take less time to generate than our 3D-spherical version. 3D-spherical version runs at O(n\textsuperscript{2}) and binned heat map would be O(n+m), where \textit{n=number of tracked events} and \textit{n = number of bins}. 
 
-Binned heat maps are generally viewed in a top-down 2D-perspective. This makes them quite good for games / levels that do not have multiple floors.
+Binned heat maps are generally viewed in a top-down 2D-perspective. This makes them quite good for games / levels that do not have multiple floors. Figure \refFig{BHM}\footnote{Source: Game Engines E2013 course Power Point slides: 13\_metrics\_final.ppt} on page \pageref{fig:BHM} is an example of a binned heat map.
 
-BINNED HEAT MAP EXAMPLE
-
-\footnote{Source: Game Engines E2013 course Power Point slides: 13\_metrics\_final.ppt}
+\insertPictureS{0.95}{BinnedHeatMap}{An example of a binned heat map.}{BHM}
 \paragraph{Reducing number of objects in the scene}
 The current implementation of our heat map plug-in generates one \textit{HeatMarker} per tracked event that is loaded. This means that if there is a lot of data, there will be very many game objects in the scene. This can slow down the Unity engine (if not cause Out of Memory exceptions), which can be problematic. 
 

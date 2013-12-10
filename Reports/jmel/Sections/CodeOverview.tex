@@ -5,12 +5,12 @@ The plug-in consists of eight scripts (six behaviour scripts, two editor scripts
 \subsection{Folder structure}
 \label{CO_FStructure}
 The plug-in contains four folders:
-\begin{my_enumerate}
-\item [\textit{Editor}] contains custom editor menues for the two of the scripts in the plug-in.
-\item [\textit{Plugins}] contains two scripts from an external plug-in.
-\item [\textit{Prefabs}] contains two prefab objects used in the plug-in.
-\item [\textit{Scripts}] contains the scripts for the main logic of the plug-in.
-\end{my_enumerate}
+\begin{my_itemize}
+\item \textbf{Editor} contains custom editor menues for the two of the scripts in the plug-in.
+\item \textbf{Plugins} contains two scripts from an external plug-in.
+\item \textbf{Prefabs} contains two prefab objects used in the plug-in.
+\item \textbf{Scripts} contains the scripts for the main logic of the plug-in.
+\end{my_itemize}
 
 \subsection{Prefabs}
 \label{CO_Prefabs}
@@ -32,7 +32,7 @@ This script is attached to objects to track (see section \ref{HowToUse_Tracking}
 \subsubsection{Load Session Data}
 When the Generate Heat Map button in the editor is clicked, the script loads the specified XML data file.
 \subsubsection{Instantiate Heat Markers}
-After the data set has been loaded, the script scans through the data set and instantiating heat markers based on the options selected in the editor (game object(s) and event type(s)) and sets their parent to the object containing the \textit[HM\_GenerateHeatMap} script (usually the \textit{HM\_HeatMap} prefab).
+After the data set has been loaded, the script scans through the data set and instantiating heat markers based on the options selected in the editor (game object(s) and event type(s)) and sets their parent to the object containing the \textit{HM\_GenerateHeatMap} script (usually the \textit{HM\_HeatMap} prefab).
 \subsubsection{Calculate Density}
 \label{CO_GHM_CD}
 After instantiating the heat markers, the script makes every heat marker calculate their density and figures out the highest density. This runs in O(n\textsuperscript{2}) because every heat marker must check every other heat marker to calculate the density.
@@ -43,7 +43,7 @@ Once the density of all heat markers has been determined, the script calculates 
 \label{CO_COS}
 The \textit{HM\_ControlObjectScript} makes sure that only one data folder is created for each tracked game session. Additionally, it ensures that the seperate data files for each tracked game object is collected into one data file at the end of the game session. At the start of the game session, a dummy object containing this script is automatically instantiated. 
 
-\subsection{HM\_Event & HM\_EventTypes}
+\subsection{HM\_Event \& HM\_EventTypes}
 \label{CO_Event}
 \textit{HM\_Event} represents an event in the game and contains the logic for how to print itself in an XML-document.
 
