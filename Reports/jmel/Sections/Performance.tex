@@ -1,8 +1,8 @@
 \section{Test}
 \label{Test}
-We tested our plug-in on three different games. An example top-down shooter game called Angry Bots\footnote{Source: https://www.assetstore.unity3d.com/\#/content/12175}, an example 2D-platformer game\footnote{Source: https://www.assetstore.unity3d.com/\#/content/11228} and a first person exploratory game called Hiraeth\footnote{https://github.com/esfdk/DarkForest} we made for a different course. We tested these three types of games to see how our heat map plug-in worked in different game types. In addition to testing the three different game types, we also the tested the performance of our plug-in.
+We tested our plug-in on three different games. An example top-down shooter game called Angry Bots\footnote{Source: https://www.assetstore.unity3d.com/\#/content/12175}, an example 2D-platformer game\footnote{Source: https://www.assetstore.unity3d.com/\#/content/11228} and a first person exploratory game called Hiraeth\footnote{https://github.com/esfdk/DarkForest} we made for a different course. We tested these three types of games to see how our heat map plug-in worked on different types of games. 
 
-The test was performed on a laptop with 8GB memory, Nvidia Geforce GTX 765M and Intel Core i7 processor (2.4 GHz).
+In addition to testing the three different game types, we also the tested the performance of our plug-in. The test was performed on a laptop with 8GB memory, Nvidia Geforce GTX 765M graphics card and Intel Core i7 processor (2.4 GHz) on the Hiraeth game.
 
 \subsection{Tested games}
 \label{Test_TG}
@@ -11,13 +11,14 @@ The test was performed on a laptop with 8GB memory, Nvidia Geforce GTX 765M and 
 
 \insertPicture{0.95}{Hiraeth_01}{A heat map generated in Hiraeth.}{H_01}
 
-Hiraeth features a relatively large square terrain with different height levels. The game was made for the Game Design E2013 course at IT-University of Copenhagen. The plug-in worked as intended. I have included an example screenshot to show the result of about heat mapping about 1.5 hours of playtime.
+Hiraeth features a relatively large square terrain with different height levels. The game was made for the Game Design E2013 course at IT-University of Copenhagen. The plug-in worked as intended. \refFig{H_01} shows an example heat map generated in the game.
 
 \subsubsection{Angry Bots}
 \label{Test_TG_AB}
-The Angry Bots game is a top-down shooter where the player moves around and shoots robots. When we tested, we successfully registered breadcrumb events and custom death events for the player game object. When we generated the heat map, the heat markers were very hard to see due to the transparency (see figure \refFig{AB_01} on page \pageref{fig:AB_01}). Giving the the developer control over the transparency of the heat marker material could be an improvement for cases like this.
+The Angry Bots game is a top-down shooter where the player moves around and shoots robots. When we tested, we successfully registered breadcrumb events and custom death events for the player game object. When we generated the heat map, the heat markers were very hard to see due to the transparency (see figure \refFig{AB_01} on page \pageref{fig:AB_01}). The screenshot on the left has some purple orbs that are very hard to see - those are the heat markers. 
+Giving the the developer control over the transparency of the heat marker material could be an improvement for cases like this.
 
-\insertTwoPictures{Test_AngryBots}{Test_AngryBots_Transparancy}{Angry Bots heat map with different levels of transparency.}{AB_01}
+\insertTwoPictures{Test_AngryBots_Transparancy}{Test_AngryBots}{Angry Bots heat map with different levels of transparency.}{AB_01}
 
 \subsubsection{Example 2D-platformer}
 \label{Test_TG_2D}
@@ -37,16 +38,20 @@ We tested how the much the tracking of events impacted the performance of our ga
 \hline
 Test number & Elements tracked & Impact \\ 
 \hline
-1 & 10 & No noticeable impact \\ 
+1 & 0 & N/A \\ 
 \hline
-2 & 20 & No noticeable impact \\ 
+2 & 10 & No noticeable impact \\ 
 \hline
-3 & 70 & No noticeable impact \\
+3 & 20 & No noticeable impact \\ 
+\hline
+4 & 70 & No noticeable impact \\ 
+\hline
+5 & 150 & No noticeable impact \\
 \hline
 \end{tabular}
 \end{center}
 
-As shown by the table, even with 70 objects tracked at a time (far more than what we would assume is necessary for most games), we could see no impact on the performance of the game. I conclude from that result that the saving/tracking of event data does not need to improved from a performance perspective.
+As shown by the table, even with 150 objects tracked at a time (far more than what we would assume is necessary for most games), we could see no impact on the performance of the game. I conclude from these results that the saving/tracking of event data does not need to improved from a performance perspective.
 
 \subsubsection{Generating the heat map}
 \label{Test_P_Generating}
@@ -84,4 +89,4 @@ Test number & Events loaded & Time in seconds \\
 \hline
 \end{tabular}
 \end{center}
-As suspected (and discussed briefly in section \ref{CO_GHM_CD}) large amounts of data slow down the heat map generation process significantly. 
+As suspected (and discussed briefly in section \ref{CO_GHM_CD}) large amounts of data slow down the heat map generation process significantly. 22568 events correspond to 6.26 hours of gameplay if breadcrumbs are tracked every second. This is a lot of a single tester, but if 30 people are tested, 6.26 hours of gameplay does not seem like a lot of time.

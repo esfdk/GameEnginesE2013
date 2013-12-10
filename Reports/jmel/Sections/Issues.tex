@@ -4,7 +4,7 @@ In this section I describe the various issues with the implementation of our plu
 \subsection{Heat map generation performance}
 \label{Issues_generationPerformance}
 Because of the O(n\textsuperscript{2}) operational complexity of the density calculation, the performance of the heat map generation is very poor on large data sets. While this does not make the plug-in non-functional, it makes it very cumbersome to use as intended. 
-\\This could possibly be solved by doing large bins and then only checking the heat markers in the bins that are within the allowed range of the positon that is currently having its density calculated.
+\\This could possibly be solved by doing large bins (bins being areas in the game world) and then only checking the heat markers in the bins that are within the allowed range of the positon that is currently having its density calculated.
 
 \subsection{Loading data from more files}
 \label{Issues_MoreFiles}
@@ -14,7 +14,7 @@ Currently the plug-in is only able to load one data set at a time. This causes a
 \subsection{Unique game object names}
 \label{Issues_UniqueNames}
 As I mention in section \ref{HowToUse_Tracking}, the names of tracked game objects must be unique. If they are not, an input/output exception occurs and data is not properly recorded. 
-\\To fix this, I would suggest adding a check to see if there is a similar named object being tracked. If there is, create a new file with the same name except with a number at the end. 
+\\To fix this, I would suggest adding a check to see if there is are other objects with the same name being tracked. If there is, create a new file with the same name except with a number at the end. 
 \\Because the render check for all events in a node with a specific name, it does not matter if the objects with the same name end up in different XML nodes when combined on game close.
 
 \subsection{Lack of Unity 2D-tool support}

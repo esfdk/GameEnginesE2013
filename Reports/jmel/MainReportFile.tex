@@ -144,17 +144,47 @@ breaklines=true}
 \begin{document}
 \thispagestyle{empty}
 \maketitle
+\newpage
+\thispagestyle{empty}
+\addtocounter{page}{-2}
+\mbox{}
 \skippage
 \tableofcontents
+\thispagestyle{empty}
+\newpage
+\thispagestyle{empty}
+\mbox{}
 \skippage
 \input{Sections/Intro.tex}
+\pagebreak
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\skippage
 \input{Sections/ProjectOverview.tex}
+\pagebreak
 \input{Sections/HowToUse.tex}
+\pagebreak
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\skippage
 \input{Sections/CodeOverview.tex}
+\pagebreak
 \input{Sections/Performance.tex}
+\pagebreak
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\skippage
 \input{Sections/Issues.tex}
+\pagebreak
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\skippage
 \input{Sections/Conclusion.tex}
-\cftaddtitleline{toc}{section}{2D-platformer project report}{}
-\cftaddtitleline{toc}{section}{Wireframe renderer project report}{}
-\cftaddtitleline{toc}{section}{Pathfinding project report}{}
+\cftaddtitleline{toc}{section}{2D-platformer Project Report}{}
+\cftaddtitleline{toc}{section}{Wireframe Renderer Project Report}{}
+\cftaddtitleline{toc}{section}{Pathfinding Project Report}{}
 \end{document}

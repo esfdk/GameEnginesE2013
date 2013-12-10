@@ -8,24 +8,24 @@ However, some game metrics are not easily understood without a visual context. T
 
 \insertPicture{0.45}{HalfLife_HeatMap}{A heat map representing deaths in a level in Half-Life 2}{HL_2_HeatMap}
 
-Heat maps are overlays on a level that show how often an event happened at a particular spot. The overlay consists of a semi-transparent object of painted with different colours. Often the colours range from either dark blue to bright yellow to dark red or from dark blue to dark purple. The further the colour is toward dark blue, the less often an event has happened there. Conversely, the further the colour is toward the dark red/purple, the more often an event has happened there. 
+Heat maps are overlays on a level that show how often an event happened at a particular spot. The overlay consists of a semi-transparent object where different parts of the object are painted with different colours. Often the colours range from either dark blue to bright yellow to dark red or from dark blue to dark purple. The further the colour is toward dark blue, the less often an event has happened there. Conversely, the further the colour is toward the dark red/purple, the more often an event has happened there. 
 
 Figure \refFig{HL_2_HeatMap}\footnote{Source: http://www.pentadact.com/2007-11-15-episode-two-death-maps/} on page \pageref{fig:HL_2_HeatMap} displays where players died in a level in Half-Life 2: Episode 2. This can indicate more than one thing; the area might be too hard, players may have missed "the trick" or the area may just be as difficult as intended. In any of these cases, the heat map provides information useful to the developer. If the area is not supposed to be difficult, then an argument could be made for making it easier. If it was supposed to be difficult, then the developers can focus on other parts of the game.
 
 \subsection{Goal of the project}
 \label{PO_goal}
-Having recently been introduced to Unity for another project (making a game called Hiraeth), Jacob Grooss and I were both interested in doing a plug-in for the engine as our final project. While alpha and beta testing Hiraeth, we felt we lacked information about which part of the game world the player(s) explored. We decided to explore heat mapping plug-ins and only found one: Game Analytics\footnote{http://www.gameanalytics.com/} (GA). While the GA plug-in seemed very powerful, we had a lot of trouble actually getting it to work. Because of this, we decided to make our own simple heat mapping plug-in.
+Having recently been introduced to Unity for another project (making a game called Hiraeth), Jacob Grooss and I were both interested in doing a plug-in for the engine as our final project. While we did alpha and beta testing on Hiraeth, we felt we lacked information about which part of the game world the player(s) explored. We decided to explore heat mapping plug-ins and only found one: Game Analytics\footnote{http://www.gameanalytics.com/} (GA). While the GA plug-in seemed very powerful, we had a lot of trouble actually getting it to work due to problems with their servers. Because of this, we decided to make our own simple heat mapping plug-in.
 
-In Unity all game objects can contain scripts. Scripts must either inherit from MonoBehaviour (most commonly used) or Editor. Any script inheriting from MonoBehaviour can override different event functions (such as OnDestroy, Start, OnMouseUp, etc.) and the Update function. The Update function is called for every frame. This makes for a quite consistent API in Unity.
+In Unity all game objects can contain scripts. Scripts must either inherit from MonoBehaviour (most commonly used) or Editor. Any script inheriting from MonoBehaviour can override different event functions (such as OnDestroy, Start, OnMouseUp, etc.) and the Update function. The Update function is called once for every frame. This makes for a quite consistent API in Unity.
 
-The goal of the project was to create a simple plug-in capable of tracking position data at certain intervals (breadcrumbs) and the positions of certain events using the consistent API. 
+The goal of the project was to create a simple plug-in capable of tracking position data at certain intervals (breadcrumbs) and the positions of events when they happen using the consistent API of Unity. 
 
 \subsubsection{Plug-in features}
 \label{PO_features}
 Because of the elements described in the goal of the project, we decided on four required features for the plug-in:
 \begin{my_itemize}
 \item \textbf{Track anything} - Any kind of event or object should be trackable through the plug-in.
-\item \textbf{Track heat map on per event basis} - The plug-in should be able to generate heat maps based specific objects and/or events (not just all objects and events).
+\item \textbf{Track heat map on per event basis} - The plug-in should be able to generate heat maps based on specific objects and/or events (not just all objects and events).
 \item \textbf{Track anything} - The plug-in should not require too much time and effort to set-up for use.
-\item \textbf{Stand-alone} - The plug-in should not require an internet connection or other software/systems besides Unity.
+\item \textbf{Stand-alone} - The plug-in should not require an internet connection and/or other software/systems besides Unity.
 \end{my_itemize}

@@ -6,7 +6,7 @@ The plug-in consists of eight scripts (six behaviour scripts, two editor scripts
 \label{CO_FStructure}
 The plug-in contains four folders:
 \begin{my_itemize}
-\item \textbf{Editor} contains custom editor menues for the two of the scripts in the plug-in.
+\item \textbf{Editor} contains custom editor menus for the two of the scripts in the plug-in.
 \item \textbf{Plugins} contains two scripts from an external plug-in.
 \item \textbf{Prefabs} contains two prefab objects used in the plug-in.
 \item \textbf{Scripts} contains the scripts for the main logic of the plug-in.
@@ -19,8 +19,8 @@ The plug-in uses two prefabs to render heat maps. The \textit{HM\_HeatMarker} is
 \subsection{HM\_Tracker}
 \label{CO_Tracker}
 This script is attached to objects to track (see section \ref{HowToUse_Tracking}). By default, it tracks the position of the object at different intervals (breadcrumbs) and can be set up to track other events. 
-\\The tracker script keeps track of both how often to track breadcrumbs and how often to save tracked events to file. Between every save, the tracker keeps a list of all occured events. This list is reset on every save to reduce the risk of memory problems. 
-\\Every tracker scripts also contains its own individual writer used to generate the XML files used for the data sets.
+\\The tracker script keeps track of both how often to track breadcrumbs and how often to save tracked events to file. Between every save, the tracker keeps a list of all occured events. This list is reset on every save to reduce the risk of out of memory problems. 
+\\Every tracker script also contains its own individual writer used to generate the XML files used for the data sets.
 
 \subsection{HM\_HeatMarkerScript}
 \label{CO_HMS}
@@ -32,10 +32,10 @@ This script is attached to objects to track (see section \ref{HowToUse_Tracking}
 \subsubsection{Load Session Data}
 When the Generate Heat Map button in the editor is clicked, the script loads the specified XML data file.
 \subsubsection{Instantiate Heat Markers}
-After the data set has been loaded, the script scans through the data set and instantiating heat markers based on the options selected in the editor (game object(s) and event type(s)) and sets their parent to the object containing the \textit{HM\_GenerateHeatMap} script (usually the \textit{HM\_HeatMap} prefab).
+After the data set has been loaded, the script scans through the data set and instantiates heat markers based on the options selected in the editor (game object(s) and event type(s)) and sets their parent to the object containing the \textit{HM\_GenerateHeatMap} script (usually the \textit{HM\_HeatMap} prefab).
 \subsubsection{Calculate Density}
 \label{CO_GHM_CD}
-After instantiating the heat markers, the script makes every heat marker calculate their density and figures out the highest density. This runs in O(n\textsuperscript{2}) because every heat marker must check every other heat marker to calculate the density.
+After instantiating the heat markers, the script makes every heat marker calculate their density and figures out the highest density. This runs in O(n\textsuperscript{2}) because every heat marker must check every other heat marker to calculate the density. Due to this complexity, generation of heat markers may take a very long time on large data sets.
 \subsubsection{Set Color}
 Once the density of all heat markers has been determined, the script calculates the relative density of every heat marker and generates a colour based on this relative density. This operation runs in O(n) time.
 
@@ -45,13 +45,11 @@ The \textit{HM\_ControlObjectScript} makes sure that only one data folder is cre
 
 \subsection{HM\_Event \& HM\_EventTypes}
 \label{CO_Event}
-\textit{HM\_Event} represents an event in the game and contains the logic for how to print itself in an XML-document.
-
-\textit{HM\_EventTypes} is a helper class that contains the names of the standard event types used in the plug-in.
+\textit{HM\_Event} represents an event in the game and contains the logic for how to print itself in an XML-document.\textit{HM\_EventTypes} is a helper class that contains the names of the standard event types used in the plug-in.
 
 \subsection{Editor scripts}
 \label{CO_Editor}
 The two editor scripts change the appearance of the \textit{HM\_GenerateHeatMap} and \textit{HM\_Tracker} by adding drop-down lists to select data files, toggle options for tracked events and buttons for generating and clearing the heat map.
 \subsection{External plug-in}
 \label{CO_PlugIn}
-The external plug-in is only used for a smooth colour transition on based on the density. The plug-in is called \footnote{Source: ColourX package http://wiki.unity3d.com/index.php/Colorx}.
+The external plug-in is only used for a smooth colour transition on based on the density. The plug-in is called ColorX \footnote{Source: ColourX package http://wiki.unity3d.com/index.php/Colorx}.
