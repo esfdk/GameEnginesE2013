@@ -1,11 +1,15 @@
 \section{Issues}
 \label{Issues}
 In this section I describe the various issues with the implementation of our plug-in.
-\subsection{Loading data from more files}
-\label{Issues_MoreFiles}
-
 \subsection{Heat map generation performance}
 \label{Issues_generationPerformance}
+Because of the O(n\textsupercript{2}) operational complexity of the density calculation, the performance of the heat map generation is very poor on large data sets. While this does not make the plug-in non-functional, it makes it very cumbersome to use as intended. 
+\\This could possibly be solved by doing large bins and then only checking the heat markers in the bins that are within the allowed range of the positon that is currently having its density calculated.
+
+\subsection{Loading data from more files}
+\label{Issues_MoreFiles}
+Currently the plug-in is only able to load one data set at a time. This causes a problem combined with the previous point. In our tests, loading data from just the single session of 3324 data points took 35 seconds. If data had to be loaded from many different files, such as from playtest sessions, the process would take an extremely long time. 
+\\A possible solution could be to make a seperate file combiner, so that loading would only need to happen once per generation of heat mapping.
 
 \subsection{Unique game object names}
 \label{Issues_UniqueNames}
