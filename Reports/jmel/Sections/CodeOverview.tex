@@ -14,6 +14,7 @@ The plug-in contains four folders:
 
 \subsection{Prefabs}
 \label{CO_Prefabs}
+The plug-in uses two prefabs to render heat maps. The \textit{HM\_HeatMarker} is used for marking event positions and the density/heat of these positions in the heat map. The \textit{HM\_HeatMap} is essentially an empty game object with the \textit{HM\_GenerateHeatMap} script attached.
 
 \subsection{HM\_GenerateHeatMap}
 \label{CO_GHM}
@@ -32,7 +33,7 @@ The plug-in contains four folders:
 
 \subsection{Editor scripts}
 \label{CO_Editor}
-
+The two editor scripts change the appearance of the \textit{HM\_GenerateHeatMap} and \textit{HM\_Tracker} by adding drop-down lists to select data files, toggle options for tracked events and buttons for generating and clearing the heat map.
 \subsection{External plug-in}
 \label{CO_PlugIn}
 The external plug-in is only used for a smooth colour transition on based on the density. The plug-in is called \footnote{Source: ColourX package http://wiki.unity3d.com/index.php/Colorx}.
