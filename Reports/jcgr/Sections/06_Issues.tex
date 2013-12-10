@@ -1,7 +1,7 @@
 \section{Issues}
 \label{Issues}
 
-While the plug-in works, there are some issues with it.
+While our testing confirmed that the plug-in worked, we did run into some issues.
 
 \subsection{Data from multiple files}
 \label{Issues_MoreFiles}
@@ -13,13 +13,15 @@ The solution to this, is to allow the user to select multiple files to load data
 \subsection{Performance of heat map generation}
 \label{Issues_GenerationPerformance}
 
-As described in section \ref{Testing_Performance_Generating}, generating the heat map becomes slower the more points that are being loaded and processed. 
+As described in section \ref{Testing_Performance_Generating}, generating the heat map becomes slower the more points that are being loaded and processed, because of the $O(n^2 + n)$ run time.
 
-It becomes slower because the script has iterate over every marker multiple times. The first iteration instantiates each marker and places it in the world, according to the tracked position. The second iteration iterates over all the markers, and, for every marker, counts how many other markers that are near it by checking the distance to every other marker. Lastly, it sets the color of each marker according to the density it had.
+There are a couple of ways to address this issue. The first way would be to do the data processing on a separate machine. Simply choose all the data that was to be used, process it, save it to a different XML format and then load that format instead. The processing could either happen on another computer, or on a server dedicated to heat mapping data. It would still be slow, but it would not stop the developer from doing anything while the heat map was being generated.
 
-Binned heat map
+Another way would be make a binned heat map instead of the current version. Instead of coloring areas of varying sizes, the map is split into x by y squares. The events are run through, and every event inside a square increases the density of that square. After all events have been run through, the squares are colored (see \refFig{HM_B} on page \pageref{fig:HM_B} for an example). This way, the run time would be reduced to $O(n + m)$ (n being the amount of events and m being the amount of squares), which is considerably faster than $O(n^2 + n)$.
 
-Process data separately.
+The trade-off is that a binned heat map is a top-down picture. Therefore, if the game a developer is working with has multiple floors linked together and they are on top of each other, he would have to generate a heat map for each floor, thus resulting in a run time of $O(h * (n + m))$ (where h is the amount of height maps to generate). As long as there are fewer heat maps to generate than there are events, it would still be a lot cheaper performance wise.
+
+\insertPictureS{0.7}{HeatMap_Binned}{A binned heat map.}{HM_B}
 
 \subsection{Object names when tracking}
 \label{Issues_UniqueNames}
